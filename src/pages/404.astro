@@ -1,0 +1,86 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "@components/nav/Nav.astro";
+import Footer from "@components/footer/Footer.astro";
+import Container from "@common/Container.astro";
+import Button from "@common/Button.astro";
+---
+
+<Layout>
+  <Nav />
+  <section class="gm_404">
+    <Container>
+      <div class="gm_404-content">
+        <h1 class="gm_404-title">404</h1>
+        <h2 class="gm_404-subtitle">Página no encontrada</h2>
+        <p class="gm_404-text">
+          Lo sentimos, la página que buscas no existe, ha sido movida o eliminada.
+        </p>
+        <div class="gm_404-button">
+          <Button itsA="link" href="/">Volver al inicio</Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+  <Footer />
+</Layout>
+
+<style>
+  .gm_404 {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 0 6rem;
+  }
+
+  .gm_404-content {
+    text-align: center;
+    max-width: 48rem;
+    margin: 0 auto;
+    animation: reveal 400ms ease-in-out;
+  }
+
+  .gm_404-title {
+    font-family: var(--gm-family-title);
+    color: var(--gm-primary);
+    font-size: 6rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 1rem;
+
+    @media screen and (width >= 768px) {
+      font-size: 8rem;
+    }
+  }
+
+  .gm_404-subtitle {
+    font-family: var(--gm-family-title);
+    color: var(--gm-title-text);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+
+    @media screen and (width >= 768px) {
+      font-size: 3rem;
+    }
+  }
+
+  .gm_404-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #4a5568;
+    margin-bottom: 2.5rem;
+    line-height: 1.5;
+
+    @media screen and (width >= 768px) {
+      font-size: 1.4rem;
+    }
+  }
+
+  .gm_404-button {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+  }
+</style>
