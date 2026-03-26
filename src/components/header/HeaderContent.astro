@@ -3,19 +3,25 @@ import Button from "@common/Button.astro";
 ---
 
 <div class="gm_header-content">
-  <h1 class="gm_pill">
-    Abogado Despido Injustificado en CDMX | Asesoría Gratuita +150 Casos Ganados
+  <p class="gm_pill">
+    Bufete de Abogados Laboralistas en CDMX | +150 Casos Exitosos
+  </p>
+  <h1 class="gm_header-title">
+    Abogados Especialistas en Despido Injustificado en Ciudad de México
   </h1>
-  <h2 class="gm_header-title">
-    Expertos en Despido Injustificado, No Pagas Si No Ganamos
-  </h2>
   <p class="gm_header-text">
-    Te despidieron sin liquidación, finiquito o prestaciones? Recupera hasta 20
-    meses de salario. Primera consulta 100% gratuita y sin compromiso.
+    ¿Fuiste despedido sin liquidación, finiquito o tus prestaciones completas?
+    En GM Abogados Laboralistas te ayudamos a recuperar lo que te corresponde
+    por ley. Con más de 150 casos exitosos en la Ciudad de México, somos tu
+    mejor opción para reclamar tu indemnización laboral. Consulta inicial
+    gratuita y sin compromiso.
   </p>
   <div class="gm_header-button">
-    <Button itsA="link" href="#contact"
-      >Consulta Gratis Ahora - Sin Compromiso</Button
+    <Button
+      itsA="link"
+      href="#contact"
+      ariaLabel="Agenda Tu Consulta Gratuita Ahora"
+      >Agenda Tu Consulta Gratuita Ahora</Button
     >
   </div>
 </div>
@@ -43,6 +49,8 @@ import Button from "@common/Button.astro";
     color: var(--gm-primary);
     font-weight: 600;
     border: 2px solid rgba(255, 254, 254, 0.8);
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
   }
 
   .gm_header-title {
@@ -59,7 +67,7 @@ import Button from "@common/Button.astro";
     }
 
     @media screen and (width >= 1024px) {
-      font-size: 4.5rem;
+      font-size: 4rem;
     }
   }
 

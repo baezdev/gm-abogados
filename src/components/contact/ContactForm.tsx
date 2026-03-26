@@ -11,23 +11,23 @@ export function ContactForm() {
     <form className="gm_contact-form reveal" onSubmit={handleSubmit}>
       <FormInput
         name="name"
-        label="Nombre"
-        placeholder="Su nombre"
+        label="Nombre Completo"
+        placeholder="¿Cuál es tu nombre?"
         type="text"
       />
       <FormInput
         name="email"
-        label="Correo electrónico"
-        placeholder="correo@correo.com"
+        label="Correo Electrónico"
+        placeholder="tucorreo@ejemplo.com"
         type="email"
       />
       <FormInput
         name="phone"
-        label="Teléfono / WhatsApp"
-        placeholder="55-0000-0000"
+        label="Teléfono o WhatsApp"
+        placeholder="55 1234 5678"
         type="tel"
       />
-      <FormInput name="message" label="Mensaje" type="textarea" />
+      <FormInput name="message" label="Cuéntanos Tu Caso" placeholder="Describe brevemente tu situación laboral y cuándo fuiste despedido" type="textarea" />
 
       <div className="gm_contact-button">
         <SendButton />
