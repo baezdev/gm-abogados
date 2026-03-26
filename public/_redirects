@@ -1,1 +1,15 @@
+# 1. http sin www → https sin www
+
+http://gm-abogados.com.mx/* https://gm-abogados.com.mx/:splat 301!
+
+# 2. https con www → https sin www
+
+https://www.gm-abogados.com.mx/* https://gm-abogados.com.mx/:splat 301!
+
+# 3. http con www → https sin www
+
+http://www.gm-abogados.com.mx/* https://gm-abogados.com.mx/:splat 301!
+
+# 4. Netlify subdomain → dominio real (del problema anterior)
+
 https://gm-abogados.netlify.app/* https://gm-abogados.com.mx/:splat 301!
