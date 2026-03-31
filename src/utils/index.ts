@@ -1,3 +1,8 @@
+export const gmBrand = {
+  name: "GM Abogados Laboralistas",
+  url: "https://gm-abogados.com.mx",
+};
+
 export const getInitialLettersName = (name: string) => {
   return name
     .split(" ")
@@ -11,13 +16,15 @@ export const gmLinks = {
     "https://wa.me/525566011051?text=Buen%20día%20Lic.%20González,%20me%20interesa%20obtener%20asesoría%20legal%20laboral.",
   instagram: "https://www.instagram.com/ji_gm3?igsh=Y2pmMDNvcDlhY3Nl",
   facebook: "https://www.facebook.com/share/17Sbbt1TUL/",
+  phone: "5566011051",
+  email: "iang27191@gmail.com",
 };
 
 export const generateContactEmail = (
   name: string,
   email: string,
   message: string,
-  phone: string
+  phone: string,
 ) => {
   const defaultMessage =
     "Necesito asesoría legal laboral. Por favor, contácteme.";

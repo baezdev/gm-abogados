@@ -1,12 +1,8 @@
 [build]
-# Este es el comando que Netlify ejecutará para construir tu sitio
+
 command = "astro build"
 
-# Esta es la carpeta que Netlify publicará (Astro la usa para los assets estáticos)
 publish = "dist/"
 
-# Esta es la parte clave. Le dice a Netlify dónde encontrar
-# las funciones del servidor que el adaptador de Astro crea.
-# El adaptador de Astro v4+ crea esta carpeta automáticamente.
 [functions]
 directory = ".netlify/functions-internal/"

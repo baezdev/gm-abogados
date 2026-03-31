@@ -1,36 +1,157 @@
 ---
-import Container from "../common/Container.astro";
-import NavLinks from "./NavLinks.astro";
-import NavLogo from "./NavLogo.astro";
-import NavMenuButton from "./NavMenuButton.astro";
+import { gmLinks } from "@utils/index";
 ---
 
-<nav
-  class="nav"
-  aria-label="Navegación principal del sitio GM Abogados Laboralistas"
->
-  <Container>
-    <div class="nav_content">
-      <NavLogo />
-      <NavLinks />
-      <NavMenuButton />
+<header class="gm-header">
+  <div class="gm-header-inner">
+    <a href="/" class="gm-logo">
+      <div class="gm-logo-mark">GM</div>
+      <span> Abogados <span class="gm-logo-light">Laboralistas</span></span>
+    </a>
+
+    <nav class="gm-nav" aria-label="Navegación principal">
+      <a href="/#situaciones">Tu Caso</a>
+      <a href="/#porque">Garantías</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/#testimonios">Casos Reales</a>
+    </nav>
+
+    <div class="gm-header-cta">
+      <a href={`tel:${gmLinks.phone}`} class="gm-phone-link">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
+          <path
+            d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.09 11.3a19.79 19.79 0 01-3.07-8.67A2 2 0 013 .5h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.37a16 16 0 006.29 6.29l1.93-1.16a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
+          ></path>
+        </svg>
+        55 6601 1051
+      </a>
+      <a href="#contacto" class="btn-primary">Consulta Gratis</a>
     </div>
-  </Container>
-</nav>
+  </div>
+</header>
+
 <style>
-  .nav {
-    padding: 1.5rem 0;
+  .gm-header {
     position: fixed;
-    width: 100%;
     top: 0;
     left: 0;
-    z-index: 50;
+    right: 0;
+    z-index: 100;
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+    height: 72px;
+    display: flex;
+    align-items: center;
+    background: rgba(10, 15, 30, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    animation: fadeDown 0.6s ease both;
   }
 
-  .nav_content {
+  @keyframes fadeDown {
+    from {
+      opacity: 0;
+      transform: translateY(-12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .gm-header-inner {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .gm-logo {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .gm-logo-mark {
+    width: 36px;
+    height: 36px;
+    background: var(--gold);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--navy);
+    flex-shrink: 0;
+  }
+
+  .gm-logo-light {
+    font-weight: 300;
+    opacity: 0.6;
+  }
+
+  .gm-nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .gm-nav a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray);
+    transition: color 0.2s;
+  }
+
+  .gm-nav a:hover {
+    color: var(--white);
+  }
+
+  .gm-header-cta {
+    display: flex;
+    align-items: center;
     gap: 1.5rem;
+  }
+
+  .gm-phone-link {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--gold2);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.2s;
+  }
+
+  .gm-phone-link:hover {
+    color: var(--white);
+  }
+
+  .gm-phone-link svg {
+    width: 15px;
+    height: 15px;
+    fill: currentColor;
+  }
+
+  @media (max-width: 900px) {
+    .gm-nav {
+      display: none;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .gm-header-cta .btn-primary {
+      display: none;
+    }
   }
 </style>

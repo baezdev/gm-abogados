@@ -1,44 +1,42 @@
 ---
 import "../styles/global.css";
-import "@fontsource-variable/inter";
-import "@fontsource-variable/merriweather";
-import { Toaster } from "react-hot-toast";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogUrl?: string;
+}
+
+const {
+  title = "GM Abogados Laboralistas CDMX | Despido Injustificado y Liquidación",
+  description = "Abogados laboralistas en Ciudad de México. Especialista en despido injustificado, acoso laboral, horas extras y riesgos de trabajo. Consulta gratuita. +150 casos ganados. Solo cobramos si ganas.",
+  canonical = "https://gm-abogados.com.mx/",
+  ogTitle = title,
+  ogDescription = description,
+  ogUrl = "https://gm-abogados.com.mx/",
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="es">
   <head>
-    <!-- ============================================ -->
-    <!-- METADATOS BÁSICOS -->
-    <!-- ============================================ -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- ============================================ -->
-    <!-- SEO FUNDAMENTAL -->
-    <!-- ============================================ -->
-    <title>
-      Abogado Despido Injustificado CDMX | GM Abogados Laboralistas - Consulta Gratis
-    </title>
+    <title>{title}</title>
 
-    <meta
-      name="description"
-      content="Bufete de abogados laboralistas en Ciudad de México especializado en despido injustificado. Consulta gratuita. Honorarios solo si ganamos. +150 casos exitosos recuperando liquidaciones completas en CDMX."
-    />
+    <meta name="description" content={description} />
 
+    <link rel="canonical" href={canonical} />
 
-    <!-- Canonical -->
-    <link rel="canonical" href="https://gm-abogados.com.mx/" />
-
-    <!-- Hreflang -->
     <link rel="alternate" hreflang="es-mx" href="https://gm-abogados.com.mx/" />
     <link rel="alternate" hreflang="es" href="https://gm-abogados.com.mx/" />
 
-    <!-- ============================================ -->
-    <!-- ROBOTS Y CRAWLING -->
-    <!-- ============================================ -->
     <meta
       name="robots"
       content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
@@ -46,17 +44,11 @@ import { Toaster } from "react-hot-toast";
     <meta name="googlebot" content="index, follow" />
     <meta name="bingbot" content="index, follow" />
 
-    <!-- ============================================ -->
-    <!-- GEO Y LOCALIZACIÓN -->
-    <!-- ============================================ -->
     <meta name="geo.region" content="MX-CMX" />
     <meta name="geo.placename" content="Ciudad de México" />
     <meta name="geo.position" content="19.4326;-99.1332" />
     <meta name="ICBM" content="19.4326, -99.1332" />
 
-    <!-- ============================================ -->
-    <!-- AUTOR Y EMPRESA -->
-    <!-- ============================================ -->
     <meta
       name="author"
       content="Lic. Jonathan Ian González Mora - GM Abogados Laboralistas"
@@ -64,79 +56,48 @@ import { Toaster } from "react-hot-toast";
     <meta name="copyright" content="GM Abogados Laboralistas" />
     <meta name="language" content="es-MX" />
 
-    <!-- ============================================ -->
-    <!-- OPEN GRAPH (Facebook, LinkedIn, WhatsApp) -->
-    <!-- ============================================ -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_MX" />
     <meta property="og:site_name" content="GM Abogados Laboralistas" />
-    <meta property="og:url" content="https://gm-abogados.com.mx/" />
-    <meta
-      property="og:title"
-      content="GM Abogados Laboralistas - Expertos en Despido Injustificado CDMX"
-    />
-    <meta
-      property="og:description"
-      content="GM Abogados Laboralistas, especialistas en despido injustificado. Consulta gratuita. Solo pagas si ganamos. Más de 150 casos exitosos en CDMX."
-    />
-    <meta
-      property="og:image"
-      content="https://gm-abogados.com.mx/og-image.jpg"
-    />
+    <meta property="og:url" content={ogUrl} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:image" content="https://gm-abogados.com.mx/og.webp" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="GM Abogados Laboralistas - Especialistas en Despido Injustificado CDMX"
+      content="GM Abogados Laboralistas CDMX - Especialistas en Derecho Laboral, Despido Injustificado y Liquidaciones"
     />
 
-    <!-- ============================================ -->
-    <!-- TWITTER CARDS -->
-    <!-- ============================================ -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@GMAbogadosMX" />
-    <meta
-      name="twitter:title"
-      content="GM Abogados Laboralistas - Expertos en Despido Injustificado CDMX"
-    />
-    <meta
-      name="twitter:description"
-      content="GM Abogados Laboralistas, especialistas en despido injustificado. Consulta gratuita. Solo pagas si ganamos. Más de 150 casos exitosos en CDMX."
-    />
-    <meta
-      name="twitter:image"
-      content="https://gm-abogados.com.mx/og-image.jpg"
-    />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
+    <meta name="twitter:image" content="https://gm-abogados.com.mx/og.webp" />
 
-    <!-- ============================================ -->
-    <!-- FAVICONS Y APP ICONS -->
-    <!-- ============================================ -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#1f3b5a" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="#1f3b5a" />
+    <meta name="theme-color" content="#0A0F1E" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="#0A0F1E" />
 
-    <!-- ============================================ -->
-    <!-- MOBILE OPTIMIZATION -->
-    <!-- ============================================ -->
     <meta name="format-detection" content="telephone=yes" />
     <meta name="handheldFriendly" content="true" />
     <meta name="MobileOptimized" content="320" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="GM Abogados" />
 
-    <!-- ============================================ -->
-    <!-- PRECONNECT PARA PERFORMANCE -->
-    <!-- ============================================ -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
-    <!-- ============================================ -->
-    <!-- SCHEMA.ORG - LOCAL BUSINESS (PRINCIPAL) -->
-    <!-- ============================================ -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -152,15 +113,13 @@ import { Toaster } from "react-hot-toast";
           "height": 600
         },
         "image": "https://gm-abogados.com.mx/gm-logo.jpg",
-        "description": "Despacho de abogados laboralistas especializado en despido injustificado en Ciudad de México. Más de 150 casos ganados. Consulta gratuita. Solo cobramos si ganamos tu caso.",
+        "description": "Despacho de abogados laboralistas en CDMX especializado en despido injustificado, acoso laboral, horas extras no pagadas y riesgos de trabajo. Consulta gratuita. +150 casos ganados. Solo cobramos si ganas.",
         "telephone": "+52-55-6601-1051",
-        "email": "contacto@gm-abogados.com.mx",
+        "email": "iang27191@gmail.com",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Av. Insurgentes Sur 1234",
           "addressLocality": "Ciudad de México",
           "addressRegion": "CDMX",
-          "postalCode": "03100",
           "addressCountry": "MX"
         },
         "geo": {
@@ -218,67 +177,10 @@ import { Toaster } from "react-hot-toast";
           "reviewCount": "150",
           "bestRating": "5",
           "worstRating": "1"
-        },
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Servicios Legales Laborales",
-          "itemListElement": [
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Despido Injustificado",
-                "description": "Representación legal completa en casos de despido injustificado. Recuperación de liquidación, indemnización y prestaciones.",
-                "provider": {
-                  "@type": "LegalService",
-                  "name": "GM Abogados Laboralistas"
-                }
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Acoso Laboral y Discriminación",
-                "description": "Defensa legal en casos de acoso laboral, hostigamiento sexual y discriminación en el trabajo.",
-                "provider": {
-                  "@type": "LegalService",
-                  "name": "GM Abogados Laboralistas"
-                }
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Recuperación de Prestaciones",
-                "description": "Reclamación de horas extras, aguinaldo, vacaciones y otras prestaciones no pagadas.",
-                "provider": {
-                  "@type": "LegalService",
-                  "name": "GM Abogados Laboralistas"
-                }
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Accidentes Laborales",
-                "description": "Asesoría y representación en casos de riesgos de trabajo y accidentes laborales.",
-                "provider": {
-                  "@type": "LegalService",
-                  "name": "GM Abogados Laboralistas"
-                }
-              }
-            }
-          ]
         }
       }
     </script>
 
-    <!-- ============================================ -->
-    <!-- SCHEMA.ORG - FAQ PAGE -->
-    <!-- ============================================ -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -289,23 +191,15 @@ import { Toaster } from "react-hot-toast";
             "name": "¿Me despidieron sin liquidación, qué hago?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Si te despidieron sin pagarte liquidación, NO firmes ningún documento sin asesoría legal. Tienes derecho a reclamar: 3 meses de salario (indemnización constitucional), 20 días de salario por cada año trabajado (prima de antigüedad), aguinaldo, vacaciones y salarios caídos. Solo tienes 2 meses para demandar desde la fecha del despido."
+              "text": "No firmes ningún documento antes de hablar con un abogado. Tienes derecho a reclamar 3 meses de salario (indemnización constitucional), 20 días por año trabajado, aguinaldo y vacaciones proporcionales. Solo tienes 2 meses para demandar."
             }
           },
           {
             "@type": "Question",
-            "name": "¿Cuánto tiempo tengo para demandar por despido injustificado?",
+            "name": "¿Puedo demandar si ya firmé mi renuncia?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Tienes solo 2 meses (60 días naturales) contados desde el día siguiente a tu despido para presentar tu demanda laboral. Si se vence el plazo, pierdes tu derecho legal a reclamar tu liquidación."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "¿Cuánto cuesta un abogado laboralista?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "En GM Abogados trabajamos sin costo inicial. Solo cobramos un porcentaje si ganamos tu caso. La consulta inicial es 100% gratuita. Si no recuperas dinero, no pagas nada."
+              "text": "Sí, en muchos casos puedes. Si firmaste bajo presión, amenazas o sin información clara, la firma no elimina tu derecho a demandar. La Suprema Corte ha establecido que firmar bajo coacción no es válido."
             }
           },
           {
@@ -313,99 +207,30 @@ import { Toaster } from "react-hot-toast";
             "name": "¿Cuánto dinero me corresponde por despido injustificado?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Tu liquidación incluye: 3 meses de salario (indemnización constitucional), 20 días de salario por cada año trabajado, aguinaldo proporcional, vacaciones no disfrutadas más prima vacacional, y salarios caídos. El monto depende de tu salario y años trabajados."
+              "text": "Depende de tu salario y antigüedad. La fórmula incluye 3 meses de salario más 20 días por año trabajado más prestaciones proporcionales. Usa la calculadora gratuita para un estimado."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuánto cobra un abogado laboralista en CDMX?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Con nosotros: $0 pesos por adelantado. Consulta inicial 100% gratis. Honorarios solo si ganamos. Si no recuperas dinero, no pagas nada."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué documentos necesito para demandar?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Solo tu identificación oficial. Si no tienes contrato, recibos de nómina ni carta de despido, no hay problema — nosotros los solicitamos a la autoridad. No tener papeles no impide que demandes."
             }
           }
         ]
       }
     </script>
-
-    <!-- ============================================ -->
-    <!-- SCHEMA.ORG - BREADCRUMB -->
-    <!-- ============================================ -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Inicio",
-            "item": "https://gm-abogados.com.mx/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Despido Injustificado",
-            "item": "https://gm-abogados.com.mx/#despido-injustificado"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Contacto",
-            "item": "https://gm-abogados.com.mx/#contact"
-          }
-        ]
-      }
-    </script>
-
-    <!-- ============================================ -->
-    <!-- SCHEMA.ORG - ATTORNEY (Abogado) -->
-    <!-- ============================================ -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Attorney",
-        "name": "Lic. Jonathan Ian González Mora",
-        "image": "https://gm-abogados.com.mx/abogado-gonzalez.jpg",
-        "jobTitle": "Abogado Laboralista",
-        "worksFor": {
-          "@type": "LegalService",
-          "name": "GM Abogados Laboralistas"
-        },
-        "alumniOf": {
-          "@type": "EducationalOrganization",
-          "name": "Universidad Nacional Autónoma de México"
-        },
-        "knowsAbout": [
-          "Derecho Laboral",
-          "Despido Injustificado",
-          "Ley Federal del Trabajo",
-          "Derecho Procesal Laboral",
-          "Seguridad Social"
-        ],
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Ciudad de México",
-          "addressRegion": "CDMX",
-          "addressCountry": "MX"
-        }
-      }
-    </script>
-
-    <!-- ============================================ -->
-    <!-- SCHEMA.ORG - WEBSITE SEARCH (Google Sitelinks) -->
-    <!-- ============================================ -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "GM Abogados Laboralistas",
-        "url": "https://gm-abogados.com.mx",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": {
-            "@type": "EntryPoint",
-            "urlTemplate": "https://gm-abogados.com.mx/buscar?q={search_term_string}"
-          },
-          "query-input": "required name=search_term_string"
-        }
-      }
-    </script>
   </head>
   <body>
     <slot />
-    <Toaster client:only />
   </body>
 </html>

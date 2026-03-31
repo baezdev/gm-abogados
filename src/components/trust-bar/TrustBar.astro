@@ -1,0 +1,69 @@
+---
+import TrustItem from "./TrustItem.astro";
+
+const trustItems = [
+  {
+    path: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    text: "Consulta 100% gratuita y sin compromiso",
+  },
+  {
+    path: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+    text: "Solo pagas si ganamos tu caso",
+  },
+  {
+    path: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z",
+    text: "+150 trabajadores recuperaron su liquidación",
+  },
+  {
+    path: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
+    text: "Respuesta en menos de 24 horas",
+  },
+  {
+    path: "M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3",
+    text: "Ley Federal del Trabajo — Art. 48 y 50",
+  },
+];
+---
+
+<div class="gm-trust-bar reveal">
+  {
+    trustItems.map((item, index) => (
+      <>
+        <TrustItem path={item.path} text={item.text} />
+        {index < trustItems.length - 1 && <div class="gm-trust-sep" />}
+      </>
+    ))
+  }
+</div>
+
+<style>
+  .gm-trust-bar {
+    background: var(--navy2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 1.25rem clamp(1.5rem, 5vw, 4rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .gm-trust-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gm-trust-sep {
+    width: 1px;
+    height: 20px;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 600px) {
+    .gm-trust-bar {
+      gap: 1.5rem;
+    }
+  }
+</style>

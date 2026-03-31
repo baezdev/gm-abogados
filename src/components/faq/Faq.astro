@@ -1,13 +1,94 @@
 ---
-import Section from "@common/Section.astro";
-import SectionTitle from "@common/SectionTitle.astro";
-import Container from "@common/Container.astro";
-import FaqList from "./FaqList.astro";
+import FaqItem from './FaqItem.astro';
+
+const faqItems = [
+  {
+    question: "¿Me despidieron sin liquidación, qué hago?",
+    answer: "<strong>No firmes ningún documento</strong> antes de hablar con un abogado. Tienes derecho a reclamar 3 meses de salario (indemnización constitucional), 20 días de salario por año trabajado, aguinaldo y vacaciones proporcionales, y salarios caídos. <strong>Solo tienes 2 meses para demandar.</strong>"
+  },
+  {
+    question: "¿Puedo demandar si ya firmé mi renuncia?",
+    answer: "<strong>Sí, en muchos casos sí puedes.</strong> Si firmaste bajo presión, amenazas o sin información clara, la firma no elimina tu derecho a demandar. La Suprema Corte ha establecido que firmar bajo coacción no es válido. Hemos ganado +150 casos donde el trabajador había firmado documentos."
+  },
+  {
+    question: "¿Cuánto dinero me corresponde por despido injustificado?",
+    answer: "Depende de tu salario y antigüedad. La fórmula básica incluye 3 meses de salario más 20 días por año trabajado más prestaciones proporcionales más salarios caídos. <strong>Usa nuestra calculadora</strong> para obtener un estimado o agenda una consulta gratuita para el cálculo exacto."
+  },
+  {
+    question: "¿Cuánto cobra un abogado laboralista en CDMX?",
+    answer: "<strong>Con nosotros: $0 pesos por adelantado.</strong> Trabajamos bajo el modelo de éxito compartido. Consulta inicial 100% gratis. Honorarios solo si ganamos. Si no recuperas dinero, no pagas nada. Sin costas judiciales ni trámites administrativos de tu parte."
+  },
+  {
+    question: "¿Cuánto tiempo tarda un juicio laboral?",
+    answer: "Por <strong>conciliación: 1 a 3 meses</strong> en promedio, cobras más rápido con menor desgaste. Por <strong>juicio tradicional: 6 a 18 meses</strong>, con posibilidad de mayor indemnización. En la consulta gratuita evaluamos cuál es la mejor estrategia para tu caso específico."
+  },
+  {
+    question: "¿Qué documentos necesito para demandar?",
+    answer: "Solo tu <strong>identificación oficial.</strong> Si no tienes contrato, recibos de nómina ni carta de despido, no hay problema — nosotros los solicitamos a la autoridad. No tener papeles no impide que demandes. Lo importante es actuar antes de que venzan los 60 días."
+  }
+];
 ---
 
-<Section background="primary" id="faq">
-  <Container>
-    <SectionTitle>Preguntas Frecuentes Sobre Despido Injustificado y Derechos Laborales en México</SectionTitle>
-    <FaqList />
-  </Container>
-</Section>
+<section class="gm-faq" id="faq">
+  <div class="gm-container">
+    <div class="gm-faq-grid">
+      <div class="gm-faq-left reveal">
+        <span class="section-label">Preguntas frecuentes</span>
+        <h2>Todo lo que necesitas saber</h2>
+        <p class="gm-faq-intro">Resolvemos las dudas más comunes. Si la tuya no está aquí, agenda una consulta gratuita.</p>
+        <a href="#contacto" class="btn-primary" style="display:inline-block;margin-top:1.5rem;">Hacer mi pregunta</a>
+      </div>
+      <div class="gm-faq-items reveal">
+        {faqItems.map((item, index) => (
+          <FaqItem question={item.question} answer={item.answer} index={index} />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gm-faq {
+    padding: 7rem clamp(1.5rem, 5vw, 4rem);
+  }
+
+  .gm-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .gm-faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .gm-faq-left {
+    position: sticky;
+    top: 7rem;
+  }
+
+  .gm-faq-intro {
+    color: var(--gray);
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .gm-faq-items {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (max-width: 900px) {
+    .gm-faq-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .gm-faq-left {
+      position: static;
+    }
+  }
+</style>

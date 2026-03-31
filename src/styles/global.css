@@ -1,117 +1,176 @@
 :root {
-  --gm-primary: #1f3b5a;
-  --gm-text: #6a6a84;
-  --gm-title-text: #151515;
-  --gm-bg-secondary: #fffefe;
-  --gm-bg: #efeef2;
-  --gm-accent: #b58f4c;
-  --gm-accent-gradient: linear-gradient(to bottom, var(--gm-accent), #d9c39c);
-  --gm-primary-gradient: linear-gradient(to right, var(--gm-primary), #35597c);
-  --gm-button-shadow: box-shadow: 0 0.4em 1em rgba(0, 0, 0, 0.1);
-
-  --gm-family-title: "Merriweather Variable", serif;
-  --gm-family-body: "Inter Variable", sans-serif;
-  --gm-font-normal: 1.125rem; /* 18px */
+  --navy: #0A0F1E;
+  --navy2: #111827;
+  --navy3: #1E2A3B;
+  --gold: #C9A84C;
+  --gold2: #E8C97A;
+  --red: #C0392B;
+  --red2: #E74C3C;
+  --white: #F5F3EE;
+  --gray: #8A9AB5;
+  --border: rgba(201,168,76,0.18);
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
 }
 
-/* 1. Usa un box-model más intuitivo en todos los elementos. */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* 2. Elimina los márgenes por defecto. */
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-p,
-figure,
-blockquote,
-dl,
-dd {
-  margin: 0;
-}
-
-/* 3. Permite que los porcentajes funcionen para la altura. */
-html,
-body {
-  margin: 0;
-  width: 100%;
-  height: 100%;
+html {
   scroll-behavior: smooth;
 }
 
-/* 4. Mejora la tipografía y suavizado de fuentes. */
 body {
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
+  font-family: var(--sans);
+  background-color: var(--navy);
+  color: var(--white);
+  overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
-/* 5. Facilita el trabajo con imágenes y otros medios. */
-img,
-picture,
-video,
-canvas,
-svg {
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+h3 {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 400;
+  font-style: italic;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+strong {
+  font-weight: 500;
+}
+
+img, picture, video, canvas, svg {
   display: block;
   max-width: 100%;
 }
 
-/* 6. Elimina los estilos por defecto de los formularios. */
-input,
-button,
-textarea,
-select {
+input, button, textarea, select {
   font: inherit;
 }
 
-/* 7. Evita desbordamientos de texto. */
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
+.gold-line {
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: var(--gold);
+  margin-bottom: 1.5rem;
 }
 
-body {
-  font-family: var(--gm-family-body);
-  background-color: var(--gm-bg);
-  color: var(--gm-text);
+.section-label {
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--navy);
+  font-family: var(--sans);
+  font-size: .82rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .65rem 1.4rem;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  transition: background .2s, transform .15s;
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  background: var(--gold2);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: .82rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .65rem 1.4rem;
+  border-radius: 3px;
+  border: 1px solid rgba(255,255,255,.25);
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
+}
+
+.btn-outline:hover {
+  border-color: var(--white);
+  background: rgba(255,255,255,.06);
+}
+
+.btn-hero {
+  background: var(--red);
+  color: #fff;
+  font-family: var(--sans);
+  font-size: .9rem;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: .9rem 2rem;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  transition: background .2s, transform .15s;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.btn-hero:hover {
+  background: var(--red2);
+  transform: translateY(-2px);
 }
 
 .reveal {
-  animation: reveal linear both;
-  animation-timeline: view();
-  animation-range: entry 20% cover 40%;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .6s ease, transform .6s ease;
 }
 
-@keyframes pulse {
-  0% {
-    transform: scale(0.8);
-  }
-  50% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(0.8);
-  }
-}
-
-@keyframes reveal {
-  from {
-    opacity: 0;
-    translate: 0 50px;
-  }
-
-  to {
-    opacity: 1;
-    translate: 0 0;
-  }
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }

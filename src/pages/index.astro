@@ -1,24 +1,44 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Nav from "@components/nav/Nav.astro";
-import Header from "@components/header/Header.astro";
-import Problems from "@components/problems/Problems.astro";
-import Services from "@components/services/Services.astro";
-import ImportantInfo from "@components/important-info/ImportantInfo.astro";
-import Reviews from "@components/reviews/Reviews.astro";
-import Faq from "@components/faq/Faq.astro";
-import Contact from "@components/contact/Contact.astro";
-import Footer from "@components/footer/Footer.astro";
+import Nav from "../components/nav/Nav.astro";
+import Hero from "../components/hero/Hero.astro";
+import TrustBar from "../components/trust-bar/TrustBar.astro";
+import Situations from "../components/situations/Situations.astro";
+import WhyUs from "../components/why-us/WhyUs.astro";
+import Calculator from "../components/calculadora/Calculator.svelte";
+import Testimonials from "../components/testimonials/Testimonials.astro";
+import Faq from "../components/faq/Faq.astro";
+import Contact from "../components/contact/Contact.astro";
+import Footer from "../components/footer/Footer.astro";
+import WhatsAppFloat from "../components/common/WhatsAppFloat.astro";
 ---
 
 <Layout>
   <Nav />
-  <Header />
-  <Problems />
-  <Services />
-  <ImportantInfo />
+  <Hero />
+  <TrustBar />
+  <Situations />
+  <WhyUs />
+  <Calculator client:only="svelte" />
+  <Testimonials />
   <Faq />
-  <Reviews />
   <Contact />
   <Footer />
+  <WhatsAppFloat />
 </Layout>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add("visible"), i * 80);
+          observer.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+  );
+
+  document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+</script>

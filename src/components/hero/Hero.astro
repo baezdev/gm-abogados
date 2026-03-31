@@ -1,0 +1,274 @@
+---
+import { gmLinks } from "@utils/index";
+import StatItem from "./StatItem.astro";
+---
+
+<section class="gm-hero" id="hero">
+  <div class="gm-hero-left">
+    <span class="gm-hero-label">Despacho Laboralista · CDMX</span>
+    <h1>Recupera tu <em>liquidación</em> sin arriesgar un peso</h1>
+    <p class="gm-hero-sub">
+      ¿Te despidieron sin liquidación, finiquito o prestaciones?
+      <strong>Tienes derecho de hasta 20 meses de salario.</strong>
+      Primera consulta 100% gratuita. Solo cobramos si ganamos.
+    </p>
+    <div class="gm-hero-actions">
+      <a href="#contacto" class="btn-hero"> Evalúa Tu Caso — Es Gratis </a>
+      <a href={`tel:${gmLinks.phone}`} class="btn-outline">Llamar Ahora</a>
+    </div>
+    <div class="gm-hero-stats">
+      <StatItem num="+150" desc="Casos ganados" />
+      <StatItem num="$0" desc="Pago anticipado" />
+      <StatItem num="24h" desc="Primera respuesta" />
+    </div>
+  </div>
+
+  <div class="gm-hero-right">
+    <div class="gm-profile-card">
+      <div class="gm-urgency-badge">
+        <div class="gm-urgency-badge-num">60</div>
+        <div class="gm-urgency-badge-text">días para<br />demandar</div>
+      </div>
+      <div class="gm-profile-img-wrap">
+        <img
+          src="/images/profile2.webp"
+          alt="Lic. Jonathan Ian González Mora"
+        />
+      </div>
+      <div class="gm-profile-badge">
+        <div class="gm-profile-badge-name">Lic. Jonathan I. González M.</div>
+        <div class="gm-profile-badge-title">Abogado Laboralista</div>
+        <div class="gm-profile-badge-ced">Cédula Profesional</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gm-hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 72px clamp(1.5rem, 5vw, 4rem) 0;
+    position: relative;
+    overflow: hidden;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .gm-hero::before {
+    content: "";
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(
+      circle,
+      rgba(201, 168, 76, 0.07) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  .gm-hero-left {
+    padding: 8rem 0 6rem;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .gm-hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .gm-hero-label::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .gm-hero h1 {
+    margin-bottom: 1.5rem;
+    max-width: 560px;
+  }
+
+  .gm-hero h1 em {
+    font-style: italic;
+    color: var(--gold2);
+  }
+
+  .gm-hero-sub {
+    font-size: 1.05rem;
+    color: var(--gray);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .gm-hero-sub strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .gm-hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 3.5rem;
+  }
+
+  .gm-hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .gm-hero-right {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-top: 6rem;
+    position: relative;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .gm-profile-card {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .gm-profile-img-wrap {
+    width: 100%;
+    aspect-ratio: 3/4;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--navy3);
+    border: 1px solid var(--border);
+    position: relative;
+  }
+
+  .gm-profile-img-wrap img {
+    margin: 0 auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+
+  .gm-profile-img-wrap::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(
+      to top,
+      rgba(10, 15, 30, 0.85) 0%,
+      transparent 100%
+    );
+  }
+
+  .gm-profile-badge {
+    position: absolute;
+    bottom: 2rem;
+    left: -1.5rem;
+    background: var(--navy2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    min-width: 200px;
+    z-index: 2;
+  }
+
+  .gm-profile-badge-name {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.2rem;
+  }
+
+  .gm-profile-badge-title {
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .gm-profile-badge-ced {
+    font-size: 0.72rem;
+    color: var(--gray);
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .gm-urgency-badge {
+    position: absolute;
+    top: 2rem;
+    right: -1.5rem;
+    background: var(--red);
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    text-align: center;
+    min-width: 130px;
+    z-index: 2;
+  }
+
+  .gm-urgency-badge-num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .gm-urgency-badge-text {
+    font-size: 0.68rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 0.2rem;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 900px) {
+    .gm-hero {
+      grid-template-columns: 1fr;
+    }
+    .gm-hero-right {
+      display: none;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .gm-hero-stats {
+      gap: 1.5rem;
+    }
+  }
+</style>

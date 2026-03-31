@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
+import svelte from "@astrojs/svelte";
 
 import netlify from "@astrojs/netlify";
 
@@ -9,13 +9,15 @@ import netlify from "@astrojs/netlify";
 export default defineConfig({
   site: "https://gm-abogados.com.mx",
   integrations: [
-    react(),
+    svelte(),
     sitemap({
       changefreq: "weekly",
       priority: 1.0,
       lastmod: new Date(),
       customPages: [
         "https://gm-abogados.com.mx/",
+        "https://gm-abogados.com.mx/legal/privacidad",
+        "https://gm-abogados.com.mx/legal/terminos",
       ],
     }),
   ],

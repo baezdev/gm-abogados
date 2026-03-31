@@ -1,0 +1,49 @@
+---
+interface Props {
+  path: string;
+  text: string;
+}
+
+const { path, text } = Astro.props;
+---
+
+<div class="gm-trust-item">
+  <svg
+    viewBox="0 0 24 24"
+    width="18"
+    height="18"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+  >
+    <path d={path}></path>
+  </svg>
+  <span>{text}</span>
+</div>
+
+<style>
+  .gm-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .gm-trust-item svg {
+    width: 18px;
+    height: 18px;
+    color: var(--gold);
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    flex-shrink: 0;
+  }
+
+  .gm-trust-item span {
+    font-size: 0.8rem;
+    color: var(--gray);
+    font-weight: 400;
+    letter-spacing: 0.03em;
+  }
+</style>

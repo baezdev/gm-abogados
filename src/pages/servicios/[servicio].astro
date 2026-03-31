@@ -1,0 +1,98 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/nav/Nav.astro";
+import Contact from "../../components/contact/Contact.astro";
+import Footer from "../../components/footer/Footer.astro";
+import WhatsAppFloat from "../../components/common/WhatsAppFloat.astro";
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  const services = [
+    {
+      slug: "despido-injustificado",
+      title: "Abogados Especialistas en Despido Injustificado en CDMX",
+      description:
+        "Si te despidieron sin liquidación, finiquito o prestaciones, tienes derecho a reclamar hasta 20 meses de salario. Consulta gratuita con nuestros abogados laboralistas.",
+    },
+    {
+      slug: "acoso-laboral",
+      title: "Abogados Especialistas en Acoso Laboral en CDMX",
+      description:
+        "Te humillan, acosan o discriminan en el trabajo? Defendemos tus derechos. Demandamos daño moral adicional. Consulta gratuita.",
+    },
+    {
+      slug: "horas-extras",
+      title: "Abogados Especialistas en Horas Extras No Pagadas en CDMX",
+      description:
+        "Trabajas más de 8 horas sin pago doble o triple? Puedes reclamar hasta 2 años de horas extras retroactivas. Consulta gratis.",
+    },
+    {
+      slug: "falta-contrato",
+      title: "Abogados para Casos Sin Contrato o Salario Incorrecto en CDMX",
+      description:
+        "Tu patrón te paga menos del mínimo o no tienes contrato? Reclamamos salarios caídos y corrección laboral. Consulta gratuita.",
+    },
+    {
+      slug: "accidente-laboral",
+      title:
+        "Abogados Especialistas en Accidentes y Enfermedades Laborales en CDMX",
+      description:
+        "Tuviste un accidente o enfermedad laboral? Reclamamos indemnización adicional al IMSS por negligencia del patrón. Consulta gratis.",
+    },
+  ];
+
+  return services.map(({ description, slug, title }) => {
+    return {
+      params: { servicio: slug },
+      props: { data: { description, slug, title } },
+    };
+  });
+}
+
+const { data } = Astro.props;
+---
+
+<Layout
+  title={data.title}
+  description={data.description}
+  canonical={`https://gm-abogados.com.mx/servicios/${Astro.params.servicio}`}
+>
+  <Nav />
+  <section class="gm-servicio">
+    <div class="gm-container">
+      <h1>{data.title}</h1>
+      <p class="gm-servicio-desc">{data.description}</p>
+      <a href="#contacto" class="btn-primary">Consulta Gratis</a>
+    </div>
+  </section>
+  <Contact />
+  <Footer />
+  <WhatsAppFloat />
+</Layout>
+
+<style>
+  .gm-servicio {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    padding: 10rem clamp(1.5rem, 5vw, 4rem) 6rem;
+  }
+
+  .gm-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .gm-servicio h1 {
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .gm-servicio-desc {
+    font-size: 1.1rem;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+</style>

@@ -1,49 +1,135 @@
 ---
-import Container from "@common/Container.astro";
+import { gmBrand } from "@utils/index";
+
+interface Props {
+  credit?: string;
+}
+
+const { credit = "Diseñado por Ing. Ángel Baez" } = Astro.props;
 
 const currentYear = new Date().getFullYear();
+
+const footerLinks = [
+  { label: "Servicios", href: "#situaciones" },
+  { label: "FAQ", href: "#faq" },
+  { label: "Contacto", href: "#contacto" },
+];
+
+const legalLinks = [
+  { label: "Política de Privacidad", href: "/legal/privacidad" },
+  { label: "Términos y Condiciones", href: "/legal/terminos" },
+];
 ---
 
-<footer>
-  <Container>
-    <div class="gm_footer">
-      <img src="/gm-logo.svg" alt="Logo de GM Abogados Laboralistas" />
+<footer class="gm-footer">
+  <div class="gm-footer-inner">
+    <nav class="gm-footer-links" aria-label="Navegación del footer">
+      {footerLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+    </nav>
+    <nav class="gm-footer-legal" aria-label="Legal">
+      {legalLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+    </nav>
 
-      <p class="gm_footer-copy">
-        ©{currentYear} Diseñado y Desarrollado por <a
-          href="https://www.linkedin.com/in/baedev/">Ing. Ángel Baez</a
-        >
-        para GM Abogados Laboralistas
-      </p>
+    <div class="gm-footer-brand">
+      <a href={gmBrand.url} class="gm-footer-logo">{gmBrand.name}</a>
+      <span class="gm-footer-copy">© {currentYear} · {credit}</span>
     </div>
-  </Container>
+  </div>
 </footer>
 
 <style>
-  footer {
-    background: var(--gm-bg-secondary);
+  .gm-footer {
+    background: var(--navy);
+    border-top: 1px solid var(--border);
+    padding: 3rem clamp(1.5rem, 5vw, 4rem);
   }
 
-  .gm_footer {
-    padding: 0 0 1rem 0;
+  .gm-footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .gm-footer-links {
+    display: flex;
+    gap: 1.5rem;
+    order: 2;
+  }
+
+  .gm-footer-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gray);
+    transition: color 0.2s;
+  }
+
+  .gm-footer-links a:hover {
+    color: var(--white);
+  }
+
+  .gm-footer-legal {
+    display: flex;
+    gap: 1rem;
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    margin-top: 0.5rem;
+  }
+
+  .gm-footer-legal a {
+    font-size: 0.72rem;
+    color: rgba(138, 154, 181, 0.6);
+    transition: color 0.2s;
+  }
+
+  .gm-footer-legal a:hover {
+    color: var(--gray);
+  }
+
+  .gm-footer-brand {
     display: flex;
     flex-direction: column;
-    align-items: center;
-
-    img {
-      width: 10rem;
-    }
+    gap: 0.25rem;
+    order: 1;
   }
 
-  .gm_footer-copy {
-    font-weight: 500;
-    text-align: center;
-    text-wrap: pretty;
+  .gm-footer-logo {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
 
-    a {
-      font-weight: 600;
-      color: var(--gm-accent);
-      text-decoration: none;
+  .gm-footer-logo:hover {
+    color: var(--white);
+  }
+
+  .gm-footer-copy {
+    font-size: 0.78rem;
+    color: rgba(138, 154, 181, 0.5);
+  }
+
+  @media (max-width: 600px) {
+    .gm-footer-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .gm-footer-links {
+      order: 1;
+    }
+
+    .gm-footer-brand {
+      order: 2;
     }
   }
 </style>
