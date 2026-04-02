@@ -1,0 +1,116 @@
+---
+const guarantees = [
+  {
+    num: "01",
+    title: "Consulta gratuita",
+    desc: "Evaluamos tu caso en 30 minutos sin costo y sin compromiso. Te decimos si tienes caso y cuánto puedes recuperar.",
+  },
+  {
+    num: "02",
+    title: "Solo pagas si ganamos",
+    desc: "Cero honorarios por adelantado. Trabajamos a porcentaje de éxito. Si no recuperas dinero, no nos pagas nada.",
+  },
+  {
+    num: "03",
+    title: "+150 casos ganados",
+    desc: "Hemos recuperado millones de pesos para trabajadores en CDMX. Conocemos cada estrategia para maximizar tu indemnización.",
+  },
+];
+---
+
+<section class="sv-section sv-garantias">
+  <div class="sv-container">
+    <span class="sv-section-label">Sin riesgo para ti</span>
+    <h2>Cómo trabajamos</h2>
+    <div class="sv-garantias-grid">
+      {
+        guarantees.map((g) => (
+          <div class="sv-garantia-card">
+            <div class="sv-garantia-num">{g.num}</div>
+            <div class="sv-garantia-title">{g.title}</div>
+            <div class="sv-garantia-desc">{g.desc}</div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .sv-section {
+    padding: 6rem clamp(1.5rem, 5vw, 4rem);
+    border-top: 1px solid var(--border, rgba(201, 168, 76, 0.18));
+  }
+
+  .sv-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .sv-section-label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold, #c9a84c);
+    margin-bottom: 0.75rem;
+  }
+
+  .sv-section h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .sv-garantias-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .sv-garantia-card {
+    background: var(--navy2, #111827);
+    border: 1px solid var(--border, rgba(201, 168, 76, 0.18));
+    border-radius: 8px;
+    padding: 2rem;
+    transition: border-color 0.2s;
+  }
+
+  .sv-garantia-card:hover {
+    border-color: rgba(201, 168, 76, 0.4);
+  }
+
+  .sv-garantia-num {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: rgba(201, 168, 76, 0.15);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+
+  .sv-garantia-title {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .sv-garantia-desc {
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.65;
+  }
+
+  @media (max-width: 900px) {
+    .sv-garantias-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
