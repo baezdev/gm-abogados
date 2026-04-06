@@ -1,4 +1,7 @@
 import type { APIRoute } from "astro";
+import { RESEND_API_KEY } from "astro:env/server";
+import { EMAIL_FROM, EMAIL_TO } from "astro:env/client";
+
 import {
   generateEmailHtml,
   validateContactForm,
@@ -7,13 +10,13 @@ import {
 } from "@lib/emailService";
 import { Resend } from "resend";
 
-const FROM_EMAIL = import.meta.env.EMAIL_FROM || "gm@correo.gm-abogados.com.mx";
-const TO_EMAIL = import.meta.env.EMAIL_TO || "baezdev@gmail.com";
-const resend = new Resend(import.meta.env.RESEND_API_KEY || "");
-
 export async function sendContactEmail(
   data: ContactFormData,
 ): Promise<SendEmailResult> {
+  const FROM_EMAIL = EMAIL_FROM;
+  const TO_EMAIL = EMAIL_TO;
+  const resend = new Resend(RESEND_API_KEY);
+
   try {
     const { data: emailData, error } = await resend.emails.send({
       from: `GM Abogados <${FROM_EMAIL}>`,

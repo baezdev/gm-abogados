@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import svelte from "@astrojs/svelte";
 
@@ -21,6 +21,25 @@ export default defineConfig({
       ],
     }),
   ],
+  env: {
+    schema: {
+      EMAIL_FROM: envField.string({
+        context: "client",
+        access: "public",
+        default: "gm@correo.gm-abogados.com.mx",
+      }),
+      EMAIL_TO: envField.string({
+        context: "client",
+        access: "public",
+        default: "baezdev@gmail.com",
+      }),
+      RESEND_API_KEY: envField.string({
+        context: "server",
+        access: "secret",
+        default: "",
+      }),
+    },
+  },
   output: "server",
   adapter: netlify(),
 });
