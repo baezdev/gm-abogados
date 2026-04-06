@@ -1,28 +1,28 @@
 <script lang="ts">
-  import Field from '../common/svelte/Field.svelte';
-  import FieldSelect from '../common/svelte/FieldSelect.svelte';
-  import ResultCard from './ResultCard.svelte';
+  import Field from "../common/svelte/Field.svelte";
+  import FieldSelect from "../common/svelte/FieldSelect.svelte";
+  import ResultCard from "./ResultCard.svelte";
 
-  let monthlySalary = '';
-  let yearsWorked = '';
-  let caseType = 'despido';
-  let signedDocument = 'no';
-  
+  let monthlySalary = "";
+  let yearsWorked = "";
+  let caseType = "despido";
+  let signedDocument = "no";
+
   let showResult = false;
   let minSettlement = 0;
   let maxSettlement = 0;
-  let errorMessage = '';
+  let errorMessage = "";
 
   const caseTypes = [
-    { value: 'despido', label: 'Despido injustificado' },
-    { value: 'renuncia', label: 'Renuncia bajo presión' },
-    { value: 'acoso', label: 'Acoso / discriminación' },
+    { value: "despido", label: "Despido injustificado" },
+    { value: "renuncia", label: "Renuncia bajo presión" },
+    { value: "acoso", label: "Acoso / discriminación" },
   ];
 
   const signedOptions = [
-    { value: 'no', label: 'No firmé nada' },
-    { value: 'si', label: 'Firmé renuncia / finiquito' },
-    { value: 'ns', label: 'No estoy seguro' },
+    { value: "no", label: "No firmé nada" },
+    { value: "si", label: "Firmé renuncia / finiquito" },
+    { value: "ns", label: "No estoy seguro" },
   ];
 
   function calculateSettlement() {
@@ -30,34 +30,38 @@
     const years = parseFloat(yearsWorked) || 0;
 
     if (!salary || !years) {
-      errorMessage = 'Por favor ingresa tu salario y los años trabajados.';
+      errorMessage = "Por favor ingresa tu salario y los años trabajados.";
       showResult = false;
       return;
     }
 
-    errorMessage = '';
+    errorMessage = "";
 
     const constitutionalIndemnity = salary * 3;
-    
+
     const dailySalary = salary / 30;
     const seniorityBonus = dailySalary * 20 * years;
-    
+
     const proratedAguinaldo = salary * (15 / 365) * 0.5;
-    
+
     const vacationDays = years <= 1 ? 6 : years <= 2 ? 8 : years <= 3 ? 10 : 12;
     const vacationPay = (salary / 365) * vacationDays * 0.5;
-    
-    const totalBaseAmount = constitutionalIndemnity + seniorityBonus + proratedAguinaldo + vacationPay;
 
-    minSettlement = Math.round(totalBaseAmount * 0.85 / 1000) * 1000;
-    maxSettlement = Math.round(totalBaseAmount * 1.35 / 1000) * 1000;
+    const totalBaseAmount =
+      constitutionalIndemnity +
+      seniorityBonus +
+      proratedAguinaldo +
+      vacationPay;
+
+    minSettlement = Math.round((totalBaseAmount * 0.85) / 1000) * 1000;
+    maxSettlement = Math.round((totalBaseAmount * 1.35) / 1000) * 1000;
 
     showResult = true;
 
     setTimeout(() => {
-      const resultElement = document.querySelector('.gm-calc-result');
+      const resultElement = document.querySelector(".gm-calc-result");
       if (resultElement) {
-        resultElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        resultElement.scrollIntoView({ behavior: "smooth", block: "nearest" });
       }
     }, 100);
   }
@@ -72,7 +76,7 @@
       </div>
       <div class="gm-calc-body">
         <div class="gm-calc-fields">
-          <Field 
+          <Field
             label="Salario mensual (MXN)"
             id="salario"
             inputType="number"
@@ -80,7 +84,7 @@
             min={1}
             bind:value={monthlySalary}
           />
-          <Field 
+          <Field
             label="Años trabajados"
             id="anios"
             inputType="number"
@@ -89,28 +93,28 @@
             max={40}
             bind:value={yearsWorked}
           />
-          <FieldSelect 
+          <FieldSelect
             label="Tipo de caso"
             id="tipo"
             options={caseTypes}
             bind:value={caseType}
           />
-          <FieldSelect 
+          <FieldSelect
             label="¿Firmaste algo?"
             id="firma"
             options={signedOptions}
             bind:value={signedDocument}
           />
         </div>
-        
+
         {#if errorMessage}
           <div class="gm-calc-error">{errorMessage}</div>
         {/if}
-        
+
         <button class="gm-calc-btn" on:click={calculateSettlement}>
           Calcular mi liquidación estimada →
         </button>
-        
+
         {#if showResult}
           <ResultCard minAmount={minSettlement} maxAmount={maxSettlement} />
         {/if}
@@ -157,40 +161,6 @@
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
     margin-bottom: 2rem;
-  }
-
-  .gm-field-group {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .gm-field-group label {
-    display: block;
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--gray);
-    margin-bottom: 0.6rem;
-  }
-
-  .gm-field-group select {
-    width: 100%;
-    background: var(--navy);
-    border: 1px solid rgba(255,255,255,.1);
-    border-radius: 4px;
-    padding: 0.75rem 1rem;
-    font-family: var(--sans);
-    font-size: 0.95rem;
-    color: var(--white);
-    outline: none;
-    transition: border-color 0.2s;
-    appearance: none;
-    cursor: pointer;
-  }
-
-  .gm-field-group select:focus {
-    border-color: var(--gold);
   }
 
   .gm-calc-error {
