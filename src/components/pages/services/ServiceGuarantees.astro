@@ -20,12 +20,17 @@ const guarantees = [
 
 <section class="sv-section sv-garantias">
   <div class="sv-container">
-    <span class="sv-section-label">Sin riesgo para ti</span>
-    <h2>Cómo trabajamos</h2>
+    <div class="reveal">
+      <span class="sv-section-label">Sin riesgo para ti</span>
+      <h2>Cómo trabajamos</h2>
+    </div>
     <div class="sv-garantias-grid">
       {
-        guarantees.map((g) => (
-          <div class="sv-garantia-card">
+        guarantees.map((g, index) => (
+          <div
+            class="sv-garantia-card reveal"
+            style={`transition-delay: ${index * 80}ms`}
+          >
             <div class="sv-garantia-num">{g.num}</div>
             <div class="sv-garantia-title">{g.title}</div>
             <div class="sv-garantia-desc">{g.desc}</div>
@@ -78,7 +83,10 @@ const guarantees = [
     border: 1px solid var(--border, rgba(201, 168, 76, 0.18));
     border-radius: 8px;
     padding: 2rem;
-    transition: border-color 0.2s;
+    transition:
+      border-color 0.2s ease,
+      opacity 0.6s ease,
+      transform 0.6s ease;
   }
 
   .sv-garantia-card:hover {

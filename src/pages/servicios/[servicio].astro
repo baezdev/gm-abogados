@@ -10,6 +10,7 @@ import ServiceGuarantees from "@components/pages/services/ServiceGuarantees.astr
 import ServiceFaq from "@components/pages/services/ServiceFaq.astro";
 import ServiceRelated from "@components/pages/services/ServiceRelated.astro";
 import { services } from "@/content/services";
+import { absoluteUrl } from "@/config/site";
 
 export const prerender = true;
 
@@ -26,7 +27,7 @@ const { data } = Astro.props;
 <Layout
   title={data.title}
   description={data.description}
-  canonical={`https://gm-abogados.com.mx/servicios/${Astro.params.servicio}`}
+  canonical={absoluteUrl(`/servicios/${Astro.params.servicio}`)}
 >
   <Nav />
   <ServiceHero data={data} />
@@ -38,3 +39,8 @@ const { data } = Astro.props;
   <Footer />
   <WhatsAppFloat />
 </Layout>
+<script>
+  import { observeReveal } from "@/utils/observer";
+
+  observeReveal();
+</script>

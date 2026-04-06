@@ -11,7 +11,7 @@ const { faqs } = Astro.props;
 
 <section class="sv-section sv-faq">
   <div class="sv-container sv-faq-grid">
-    <div class="sv-faq-left">
+    <div class="sv-faq-left reveal">
       <span class="sv-section-label">Preguntas frecuentes</span>
       <h2>Resolvemos tus dudas</h2>
       <p>
@@ -22,7 +22,7 @@ const { faqs } = Astro.props;
         Hacer mi pregunta
       </a>
     </div>
-    <div class="sv-faq-items">
+    <div class="sv-faq-items reveal">
       {
         faqs.map((faq, i) => (
           <FaqItem question={faq.q} answer={faq.a} index={i} />

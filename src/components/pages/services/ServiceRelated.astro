@@ -11,12 +11,18 @@ const { relacionados } = Astro.props;
 
 <section class="sv-section sv-relacionados">
   <div class="sv-container">
-    <span class="sv-section-label">Otros servicios</span>
-    <h2>También podemos ayudarte con</h2>
+    <div class="reveal">
+      <span class="sv-section-label">Otros servicios</span>
+      <h2>También podemos ayudarte con</h2>
+    </div>
     <div class="sv-relacionados-grid">
       {
-        relacionados.map((slug) => (
-          <a href={`/servicios/${slug}`} class="sv-relacionado-card">
+        relacionados.map((slug, index) => (
+          <a
+            href={`/servicios/${slug}`}
+            class="sv-relacionado-card reveal"
+            style={`transition-delay: ${index * 80}ms`}
+          >
             <div class="sv-relacionado-title">{slugToTitle[slug]}</div>
             <div class="sv-relacionado-arrow">
               <ArrowR />
@@ -75,8 +81,10 @@ const { relacionados } = Astro.props;
     border-radius: 8px;
     text-decoration: none;
     transition:
-      border-color 0.2s,
-      background 0.2s;
+      border-color 0.2s ease,
+      background 0.2s ease,
+      opacity 0.6s ease,
+      transform 0.6s ease;
   }
 
   .sv-relacionado-card:hover {
