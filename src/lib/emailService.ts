@@ -1,10 +1,3 @@
-import { Resend } from "resend";
-
-const resend = new Resend(import.meta.env.RESEND_API_KEY);
-
-const FROM_EMAIL = import.meta.env.EMAIL_FROM || "gm@correo.gm-abogados.com.mx";
-const TO_EMAIL = import.meta.env.EMAIL_TO || "baezdev@gmail.com";
-
 export interface ContactFormData {
   name: string;
   phone: string;
@@ -105,29 +98,4 @@ export function generateEmailHtml(data: ContactFormData): string {
 export interface SendEmailResult {
   success: boolean;
   error?: string;
-}
-
-export async function sendContactEmail(
-  data: ContactFormData,
-): Promise<SendEmailResult> {
-  try {
-    const { data: emailData, error } = await resend.emails.send({
-      from: `GM Abogados <${FROM_EMAIL}>`,
-      to: TO_EMAIL,
-      subject: `Nuevo mensaje de ${data.name} - ${data.problem}`,
-      html: generateEmailHtml(data),
-    });
-
-    console.log(error);
-
-    if (error) {
-      console.error("Resend error:", error);
-      return { success: false, error: "Error al enviar el correo" };
-    }
-
-    return { success: true };
-  } catch (err) {
-    console.error("Email service error:", err);
-    return { success: false, error: "Error al procesar la solicitud" };
-  }
 }
