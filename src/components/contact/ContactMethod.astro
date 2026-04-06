@@ -1,0 +1,89 @@
+---
+interface Props {
+  icon: string;
+  label: string;
+  value: string;
+  href: string;
+  iconColor?: 'default' | 'whatsapp' | 'email';
+}
+
+const { icon, label, value, href, iconColor = 'default' } = Astro.props;
+---
+
+<a {href} class="gm-contact-method">
+  <div class={`gm-contact-method-icon gm-icon-${iconColor}`}>
+    <Fragment set:html={icon} />
+  </div>
+  <div>
+    <div class="gm-contact-method-label">{label}</div>
+    <div class="gm-contact-method-value">{value}</div>
+  </div>
+</a>
+
+<style>
+  .gm-contact-method {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--navy);
+    cursor: pointer;
+    transition: border-color 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .gm-contact-method:hover {
+    border-color: rgba(201,168,76,.5);
+  }
+
+  .gm-contact-method-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .gm-icon-default {
+    background: rgba(201,168,76,.1);
+  }
+
+  .gm-icon-default :global(svg) {
+    stroke: var(--gold);
+  }
+
+  .gm-icon-whatsapp {
+    background: rgba(37,211,102,.1);
+  }
+
+  .gm-icon-whatsapp :global(svg) {
+    stroke: #25D366;
+  }
+
+  .gm-icon-email {
+    background: rgba(138,154,181,.1);
+  }
+
+  .gm-icon-email :global(svg) {
+    stroke: var(--gray);
+  }
+
+  .gm-contact-method-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 0.15rem;
+  }
+
+  .gm-contact-method-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--white);
+  }
+</style>

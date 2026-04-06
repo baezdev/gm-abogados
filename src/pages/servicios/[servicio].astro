@@ -1,0 +1,46 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Nav from "@components/nav/Nav.astro";
+import Contact from "@components/contact/Contact.astro";
+import Footer from "@components/footer/Footer.astro";
+import WhatsAppFloat from "@components/common/WhatsAppFloat.astro";
+import ServiceHero from "@components/pages/services/ServiceHero.astro";
+import ServiceRights from "@components/pages/services/ServiceRights.astro";
+import ServiceGuarantees from "@components/pages/services/ServiceGuarantees.astro";
+import ServiceFaq from "@components/pages/services/ServiceFaq.astro";
+import ServiceRelated from "@components/pages/services/ServiceRelated.astro";
+import { services } from "@/data/services";
+import { absoluteUrl } from "@/config/site";
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  return services.map((service) => ({
+    params: { servicio: service.slug },
+    props: { data: service },
+  }));
+}
+
+const { data } = Astro.props;
+---
+
+<Layout
+  title={data.title}
+  description={data.description}
+  canonical={absoluteUrl(`/servicios/${Astro.params.servicio}`)}
+>
+  <Nav />
+  <ServiceHero data={data} />
+  <ServiceRights data={data} />
+  <ServiceGuarantees />
+  <ServiceFaq faqs={data.faqs} />
+  <ServiceRelated relacionados={data.relacionados} />
+  <Contact />
+  <Footer />
+  <WhatsAppFloat />
+</Layout>
+<script>
+  import { observeReveal } from "@/utils/observer";
+
+  observeReveal();
+</script>

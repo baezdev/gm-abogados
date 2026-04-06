@@ -1,0 +1,110 @@
+---
+import SituationCard from "./SituationCard.astro";
+import { situaciones } from "@/data/situations";
+---
+
+<section class="gm-situaciones" id="situaciones">
+  <div class="gm-container">
+    <div class="gm-section-header reveal">
+      <span class="section-label">Identifica tu caso</span>
+      <h2>¿Te pasó alguna de estas situaciones?</h2>
+      <p class="gm-section-intro">
+        Si tu empleador violó tus derechos laborales en CDMX, tienes derecho a
+        una indemnización. Identifica tu caso.
+      </p>
+    </div>
+
+    <div class="gm-situaciones-grid">
+      {
+        situaciones.map((item, index) => (
+          <div class="reveal" style={`animation-delay: ${index * 80}ms`}>
+            <SituationCard
+              num={item.num}
+              title={item.title}
+              description={item.description}
+              arts={item.arts}
+              url={item.url}
+            />
+          </div>
+        ))
+      }
+      <div class="gm-situacion-card gm-situacion-cta reveal">
+        <div class="gm-situacion-cta-title">¿Tu caso es diferente?</div>
+        <div class="gm-situacion-cta-desc">
+          Cuéntanos en una consulta gratuita de 30 minutos y te decimos si
+          tienes derecho a demandar.
+        </div>
+        <a href="#contacto" class="btn-primary">Consulta Gratis</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gm-situaciones {
+    padding: 7rem clamp(1.5rem, 5vw, 4rem);
+  }
+
+  .gm-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .gm-section-header {
+    max-width: 600px;
+    margin-bottom: 4rem;
+  }
+
+  .gm-section-intro {
+    color: var(--gray);
+    margin-top: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .gm-situaciones-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .gm-situacion-cta {
+    background: var(--navy2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    grid-column: span 1;
+  }
+
+  .gm-situacion-cta-title {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .gm-situacion-cta-desc {
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .gm-situaciones-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .gm-situaciones-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

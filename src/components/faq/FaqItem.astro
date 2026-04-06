@@ -2,97 +2,133 @@
 interface Props {
   question: string;
   answer: string;
-  name?: string;
+  index: number;
 }
 
-const { question, answer, name = "faq" } = Astro.props;
+const { question, answer, index } = Astro.props;
+const answerId = `faq-answer-${index}`;
+const buttonId = `faq-button-${index}`;
 ---
 
-<details name={name} class="gm_faq-item reveal">
-  <summary>
+<div class="gm-faq-item" data-index={index}>
+  <button 
+    class="gm-faq-question" 
+    id={buttonId}
+    aria-expanded="false" 
+    aria-controls={answerId}
+    data-target={answerId}
+  >
     {question}
-    <span aria-label="expander o contraer">
-      <svg
-        id="open-icon"
-        xmlns="http://www.w3.org/2000/svg"
-        width="34"
-        height="34"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="icon icon-tabler icons-tabler-outline icon-tabler-plus"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <path d="M12 5l0 14"></path>
-        <path d="M5 12l14 0"></path>
-      </svg>
-    </span>
-  </summary>
-  <p set:html={answer} />
-</details>
+    <span class="gm-faq-icon">+</span>
+  </button>
+  <div 
+    class="gm-faq-answer" 
+    id={answerId}
+    role="region" 
+    aria-labelledby={buttonId}
+  >
+    <div class="gm-faq-answer-inner" set:html={answer} />
+  </div>
+</div>
 
 <style>
-  .gm_faq-item {
-    background: var(--gm-bg-secondary);
-    border-radius: 1.2rem;
-    transition: scale 300ms linear;
-    overflow: clip;
-
-    &[open] summary span {
-      transform: rotate(45deg);
-      color: var(--gm-accent);
-    }
-
-    &[open] {
-      &::details-content {
-        height: auto;
-      }
-    }
-
-    summary {
-      font-size: 1.2rem;
-      padding: 1.4rem 1.6rem;
-      color: var(--gm-title-text);
-      font-weight: 600;
-      display: grid;
-      grid-template-columns: 1fr 2rem;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      gap: 1rem;
-
-      span {
-        transition-property: transform color;
-        transition-duration: 200ms;
-        transition-timing-function: ease-in-out;
-      }
-
-      @media screen and (width >= 1024px) {
-        font-size: 1.4rem;
-        padding: 2rem 2.4rem;
-      }
-    }
-
-    p {
-      padding: 0 1.6rem 1.4rem 1.6rem;
-      font-size: 1.1rem;
-      font-weight: 400;
-
-      @media screen and (width >= 1024px) {
-        max-width: 70%;
-        padding: 0 2.4rem 2rem 2.4rem;
-        font-size: 1.4rem;
-      }
-    }
+  .gm-faq-item {
+    border-bottom: 1px solid var(--border);
   }
 
-  .gm_faq-item::details-content {
-    height: 0;
-    transition:
-      height 300ms linear,
-      content-visibility 300ms allow-discrete;
+  .gm-faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 1.5rem 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--white);
+    transition: color 0.2s;
+  }
+
+  .gm-faq-question:hover {
+    color: var(--gold2);
+  }
+
+  .gm-faq-icon {
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+    color: var(--gold);
+    transition: transform 0.3s, background 0.2s;
+  }
+
+  .gm-faq-item.open .gm-faq-icon {
+    transform: rotate(45deg);
+    background: rgba(201,168,76,.1);
+  }
+
+  .gm-faq-answer {
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+    max-height: 0;
+  }
+
+  .gm-faq-item.open .gm-faq-answer {
+    max-height: var(--faq-height, 400px);
+  }
+
+  .gm-faq-answer-inner {
+    font-size: 0.9rem;
+    color: var(--gray);
+    line-height: 1.75;
+    padding-bottom: 1.5rem;
+  }
+
+  .gm-faq-answer-inner :global(strong) {
+    color: var(--white);
+    font-weight: 500;
   }
 </style>
+
+<script>
+  function initFaq() {
+    const items = document.querySelectorAll('.gm-faq-item');
+    
+    items.forEach(item => {
+      const btn = item.querySelector('.gm-faq-question');
+      const answer = item.querySelector('.gm-faq-answer');
+      
+      if (!btn || !answer) return;
+      
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        
+        document.querySelectorAll('.gm-faq-item.open').forEach(el => {
+          el.classList.remove('open');
+          const b = el.querySelector('.gm-faq-question');
+          if (b) b.setAttribute('aria-expanded', 'false');
+        });
+        
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        } else {
+          answer.style.maxHeight = '0';
+        }
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initFaq);
+</script>

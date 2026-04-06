@@ -1,0 +1,112 @@
+---
+interface Props {
+  amount: string;
+  text: string;
+  name: string;
+  case: string;
+  initials: string;
+  delay?: number;
+}
+
+const { amount, text, name, case: caseType, initials, delay = 0 } = Astro.props;
+---
+
+<blockquote class="gm-testimonio-card" style={`--delay: ${delay}ms`}>
+  <div class="gm-testimonio-quote">"</div>
+  <div class="gm-testimonio-amount">{amount}</div>
+  <p class="gm-testimonio-text">"{text}"</p>
+  <footer class="gm-testimonio-author">
+    <div class="gm-author-avatar">{initials}</div>
+    <div>
+      <cite class="gm-author-name">{name}</cite>
+      <div class="gm-author-case">{caseType}</div>
+    </div>
+  </footer>
+</blockquote>
+
+<style>
+  .gm-testimonio-card {
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2rem;
+    position: relative;
+    transition: border-color 0.2s;
+    animation-delay: var(--delay);
+    margin: 0;
+  }
+
+  .gm-testimonio-card:hover {
+    border-color: rgba(201,168,76,.4);
+  }
+
+  .gm-testimonio-quote {
+    font-family: var(--serif);
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: rgba(201,168,76,.15);
+    line-height: 0.8;
+    margin-bottom: 0.5rem;
+    user-select: none;
+  }
+
+  .gm-testimonio-amount {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+
+  .gm-testimonio-text {
+    font-size: 0.87rem;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .gm-testimonio-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .gm-author-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--navy3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--gold);
+    flex-shrink: 0;
+    border: 1px solid rgba(201,168,76,.2);
+  }
+
+  .gm-author-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--white);
+    font-style: normal;
+  }
+
+  .gm-author-case {
+    font-size: 0.75rem;
+    color: var(--gray);
+    margin-top: 0.1rem;
+  }
+
+  @media (max-width: 900px) {
+    .gm-testimonio-card {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

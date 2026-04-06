@@ -1,3 +1,10 @@
+import { absoluteUrl, site, whatsappUrl } from "@/config/site";
+
+export const gmBrand = {
+  name: site.name,
+  url: site.origin,
+};
+
 export const getInitialLettersName = (name: string) => {
   return name
     .split(" ")
@@ -7,17 +14,19 @@ export const getInitialLettersName = (name: string) => {
 };
 
 export const gmLinks = {
-  whatsapp:
-    "https://wa.me/525566011051?text=Buen%20día%20Lic.%20González,%20me%20interesa%20obtener%20asesoría%20legal%20laboral.",
-  instagram: "https://www.instagram.com/ji_gm3?igsh=Y2pmMDNvcDlhY3Nl",
-  facebook: "https://www.facebook.com/share/17Sbbt1TUL/",
+  whatsapp: whatsappUrl(),
+  instagram: site.instagram,
+  facebook: site.facebook,
+  phone: site.phoneDigits,
+  phoneDisplay: site.phoneDisplay,
+  email: site.email,
 };
 
 export const generateContactEmail = (
   name: string,
   email: string,
   message: string,
-  phone: string
+  phone: string,
 ) => {
   const defaultMessage =
     "Necesito asesoría legal laboral. Por favor, contácteme.";
@@ -37,7 +46,7 @@ export const generateContactEmail = (
         >
           <div>
             <img
-              src="https://gm-abogados.com.mx/gm-logo.jpg"
+              src="${absoluteUrl(site.logoPath)}"
               alt="Logo GM Abogados"
               style="max-width: 150px; margin-bottom: 20px;"
             />

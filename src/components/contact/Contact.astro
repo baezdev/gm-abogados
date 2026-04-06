@@ -1,152 +1,108 @@
 ---
-import Container from "@common/Container.astro";
-import Section from "@common/Section.astro";
-import SectionTitle from "@common/SectionTitle.astro";
-import Instagram from "@components/icons/Instagram.astro";
-import Facebook from "@components/icons/Facebook.astro";
-import Whatsapp from "@components/icons/Whatsapp.astro";
-
 import { gmLinks } from "@utils/index";
-import { ContactForm } from "./ContactForm";
+import ContactMethod from "./ContactMethod.astro";
+import ContactForm from "./ContactForm.svelte";
+
+interface ContactMethodData {
+  icon: string;
+  label: string;
+  value: string;
+  href: string;
+  iconColor: "default" | "whatsapp" | "email";
+}
+
+const contactMethods: ContactMethodData[] = [
+  {
+    icon: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.09 11.3a19.79 19.79 0 01-3.07-8.67A2 2 0 013 .5h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.37a16 16 0 006.29 6.29l1.93-1.16a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>`,
+    label: "Llamada directa",
+    value: gmLinks.phoneDisplay,
+    href: `tel:${gmLinks.phone}`,
+    iconColor: "default",
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>`,
+    label: "WhatsApp",
+    value: "Mensaje directo",
+    href: gmLinks.whatsapp,
+    iconColor: "whatsapp",
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`,
+    label: "Correo electrónico",
+    value: gmLinks.email,
+    href: `mailto:${gmLinks.email}`,
+    iconColor: "email",
+  },
+];
 ---
 
-<Section background="primary" id="contact">
-  <Container>
-    <SectionTitle
-      >Agenda Tu Consulta Gratuita - Respuesta en 24 Horas</SectionTitle
-    >
-    <p class="gm_contact-text reveal">
-      <strong>Agenda tu consulta gratuita en menos de 2 minutos.</strong>
-      Te respondemos en menos de 24 horas y analizamos tu caso sin costo ni compromiso.
-      Descubre exactamente cuánto puedes recuperar y cómo proceder legalmente.
-    </p>
-    <div class="gm_contact-container">
-      <ContactForm client:only />
+<section class="gm-contacto" id="contacto">
+  <div class="gm-container">
+    <div class="gm-contacto-grid">
+      <div class="gm-contacto-left reveal">
+        <span class="section-label">Agenda tu consulta</span>
+        <h2>Respuesta en menos de 24 horas</h2>
+        <p class="gm-contacto-desc">
+          Evaluamos tu caso de forma gratuita y sin compromiso. Descubre
+          exactamente cuánto puedes recuperar y cómo proceder legalmente.
+        </p>
 
-      <aside class="gm_contact-secondary reveal">
-        <div class="gm_contact-secondary-item">
-          <p>Escribenos a</p>
-          <a href="mailto:iang27191@gmail.com"
-            >iang27191@gmail.com <span></span></a
-          >
+        <div class="gm-contact-methods">
+          {contactMethods.map((method) => <ContactMethod {...method} />)}
         </div>
-        <div class="gm_contact-secondary-item">
-          <p>Llamanos al</p>
-          <a href="tel:+525566011051">55 66011051 <span></span></a>
-        </div>
-        <div class="gm_contact-socials">
-          <a
-            href={gmLinks.instagram}
-            target="_blank"
-            name="Link para ir al Instagram del Lic. Gonzalez Mora"
-            ><Instagram /></a
-          >
-          <a
-            href={gmLinks.facebook}
-            target="_blank"
-            name="Link para ir Facebook al del Lic. Gonzalez Mora"
-            ><Facebook /></a
-          >
-          <a
-            href={gmLinks.whatsapp}
-            target="_blank"
-            name="Link para ir al Whatsapp del Lic. Gonzalez Mora"
-            ><Whatsapp /></a
-          >
-        </div>
-      </aside>
+      </div>
+
+      <div class="gm-contacto-form reveal">
+        <div class="gm-form-title">Cuéntanos tu caso</div>
+        <ContactForm client:visible />
+      </div>
     </div>
-  </Container>
-</Section>
+  </div>
+</section>
 
 <style>
-  .gm_contact-text {
-    font-size: 1.2rem;
-    margin-top: 1.5rem;
-    font-weight: 500;
-    line-height: 1.25;
-    margin-top: 1.5rem;
-
-    @media screen and (width >= 768px) {
-      max-width: 35rem;
-      font-size: 1.4rem;
-    }
+  .gm-contacto {
+    padding: 7rem clamp(1.5rem, 5vw, 4rem);
+    background: var(--navy2);
+    border-top: 1px solid var(--border);
   }
 
-  .gm_contact-container {
-    padding: 2.8rem 0;
-
-    @media screen and (width >= 1024px) {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12rem;
-      align-items: center;
-    }
+  .gm-container {
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
-  .gm_contact-secondary {
+  .gm-contacto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .gm-contacto-desc {
+    font-size: 0.95rem;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .gm-contact-methods {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    margin-top: 3rem;
-
-    @media screen and (width >= 1024px) {
-      margin-top: 0;
-    }
-  }
-
-  .gm_contact-secondary-item {
-    p {
-      font-size: 1.3rem;
-      font-family: var(--gm-family-title);
-      color: var(--gm-primary);
-      margin-bottom: 0.6rem;
-    }
-
-    a {
-      font-size: 1.2rem;
-      color: var(--gm-title-text);
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      cursor: pointer;
-      text-decoration: none;
-
-      span {
-        display: block;
-        width: 0.7rem;
-        height: 0.7rem;
-        background: var(--gm-accent-gradient);
-        border-radius: 999px;
-        animation: pulse 1.5s infinite;
-      }
-    }
-  }
-
-  .gm_contact-socials {
-    display: flex;
     gap: 1rem;
+  }
 
-    a {
-      background: var(--gm-accent-gradient);
-      padding: 0.8rem;
-      border-radius: 999px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gm-bg-secondary);
-      box-shadow: var(--gm-button-shadow);
-      scale: 1.04;
-      transition: scale 150ms ease-in-out;
+  .gm-form-title {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1.75rem;
+  }
 
-      &:hover {
-        scale: 1.1;
-      }
-
-      &:active {
-        scale: 1;
-      }
+  @media (max-width: 900px) {
+    .gm-contacto-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
     }
   }
 </style>

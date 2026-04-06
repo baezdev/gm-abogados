@@ -1,0 +1,147 @@
+---
+import TestimonialCard from './TestimonialCard.astro';
+
+const testimonios = [
+  {
+    amount: "$127,000 recuperados",
+    text: "Me despidieron sin más y no sabía por dónde empezar. El Lic. González fue muy claro en lo que me tocaba y me ayudó a recuperar hasta el último peso.",
+    name: "Raúl P. Ramírez",
+    case: "Despido injustificado · 4 años",
+    initials: "RP"
+  },
+  {
+    amount: "Liquidación + daño moral",
+    text: "Pensé que al haber firmado mi renuncia ya no podía hacer nada. El Lic. González me explicó que podíamos impugnar el documento y ganamos.",
+    name: "Patricia R. Mendoza",
+    case: "Discriminación por embarazo",
+    initials: "PR"
+  },
+  {
+    amount: "2 años de horas extras",
+    text: "Mi patrón no me quería pagar mis horas extras. En poco tiempo el Lic. González arregló el asunto por conciliación. Muy bueno en lo que hace.",
+    name: "Sergio D. Martínez",
+    case: "Horas extras no pagadas",
+    initials: "SD"
+  }
+];
+---
+
+<section class="gm-testimonios" id="testimonios">
+  <div class="gm-container">
+    <div class="gm-section-header reveal">
+      <span class="section-label">Casos reales</span>
+      <h2>Trabajadores que ya recuperaron su liquidación</h2>
+    </div>
+    <div class="gm-testimonios-grid">
+      {testimonios.map((item, index) => (
+        <TestimonialCard {...item} delay={index * 100} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .gm-testimonios {
+    padding: 7rem clamp(1.5rem, 5vw, 4rem);
+    background: var(--navy2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .gm-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .gm-section-header {
+    margin-bottom: 3.5rem;
+  }
+
+  .gm-testimonios-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .gm-testimonio-card {
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2rem;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+
+  .gm-testimonio-card:hover {
+    border-color: rgba(201,168,76,.4);
+  }
+
+  .gm-testimonio-quote {
+    font-family: var(--serif);
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: rgba(201,168,76,.15);
+    line-height: 0.8;
+    margin-bottom: 0.5rem;
+    user-select: none;
+  }
+
+  .gm-testimonio-amount {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+
+  .gm-testimonio-text {
+    font-size: 0.87rem;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .gm-testimonio-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .gm-author-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--navy3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--gold);
+    flex-shrink: 0;
+    border: 1px solid rgba(201,168,76,.2);
+  }
+
+  .gm-author-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--white);
+  }
+
+  .gm-author-case {
+    font-size: 0.75rem;
+    color: var(--gray);
+    margin-top: 0.1rem;
+  }
+
+  @media (max-width: 900px) {
+    .gm-testimonios-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

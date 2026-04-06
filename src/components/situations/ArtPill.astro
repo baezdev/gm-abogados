@@ -1,0 +1,21 @@
+---
+interface Props {
+  art: string;
+}
+
+const { art } = Astro.props;
+---
+
+<span class="gm-art-pill">{art}</span>
+
+<style>
+  .gm-art-pill {
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    padding: 0.2rem 0.55rem;
+    border-radius: 20px;
+    border: 1px solid rgba(201,168,76,.3);
+    color: var(--gold);
+  }
+</style>

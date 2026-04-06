@@ -1,36 +1,471 @@
 ---
-import Container from "../common/Container.astro";
-import NavLinks from "./NavLinks.astro";
-import NavLogo from "./NavLogo.astro";
-import NavMenuButton from "./NavMenuButton.astro";
+import { gmLinks } from "@utils/index";
 ---
 
-<nav
-  class="nav"
-  aria-label="Navegación principal del sitio GM Abogados Laboralistas"
->
-  <Container>
-    <div class="nav_content">
-      <NavLogo />
-      <NavLinks />
-      <NavMenuButton />
+<header class="gm-header">
+  <div class="gm-header-inner">
+    <a href="/" class="gm-logo">
+      <div class="gm-logo-mark">GM</div>
+      <span> Abogados <span class="gm-logo-light">Laboralistas</span></span>
+    </a>
+
+    <button
+      type="button"
+      class="gm-menu-toggle"
+      aria-expanded="false"
+      aria-controls="gm-drawer"
+      aria-label="Abrir menú"
+    >
+      <span class="gm-menu-toggle-icon" aria-hidden="true">
+        <span class="gm-menu-toggle-bar"></span>
+        <span class="gm-menu-toggle-bar"></span>
+        <span class="gm-menu-toggle-bar"></span>
+      </span>
+    </button>
+
+    <nav class="gm-nav gm-nav-desktop" aria-label="Navegación principal">
+      <a href="/#situaciones">Tu Caso</a>
+      <a href="/#porque">Garantías</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/#testimonios">Casos Reales</a>
+    </nav>
+
+    <div class="gm-header-cta">
+      <a href={`tel:${gmLinks.phone}`} class="gm-phone-link">
+        <svg
+          viewBox="0 0 24 24"
+          width="15"
+          height="15"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.09 11.3a19.79 19.79 0 01-3.07-8.67A2 2 0 013 .5h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.37a16 16 0 006.29 6.29l1.93-1.16a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
+          ></path>
+        </svg>
+        {gmLinks.phoneDisplay}
+      </a>
+      <a href="#contacto" class="btn-primary">Consulta Gratis</a>
     </div>
-  </Container>
-</nav>
+  </div>
+
+  <div class="gm-drawer-backdrop" data-gm-drawer-close aria-hidden="true"></div>
+  <aside
+    id="gm-drawer"
+    class="gm-drawer"
+    inert
+    aria-hidden="true"
+    aria-label="Menú"
+  >
+    <nav class="gm-drawer-nav" aria-label="Navegación principal">
+      <a href="/#situaciones">Tu Caso</a>
+      <a href="/#porque">Garantías</a>
+      <a href="#faq">FAQ</a>
+      <a href="/#testimonios">Casos Reales</a>
+    </nav>
+    <div class="gm-drawer-footer">
+      <a href={`tel:${gmLinks.phone}`} class="gm-phone-link gm-drawer-phone">
+        <svg
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.09 11.3a19.79 19.79 0 01-3.07-8.67A2 2 0 013 .5h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.37a16 16 0 006.29 6.29l1.93-1.16a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
+          ></path>
+        </svg>
+        {gmLinks.phoneDisplay}
+      </a>
+      <a href="#contacto" class="btn-primary gm-drawer-cta">Consulta Gratis</a>
+    </div>
+  </aside>
+</header>
+
 <style>
-  .nav {
-    padding: 1.5rem 0;
+  .gm-header {
     position: fixed;
-    width: 100%;
     top: 0;
     left: 0;
-    z-index: 50;
+    right: 0;
+    z-index: 100;
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+    height: 72px;
+    display: flex;
+    align-items: center;
+    background: rgba(10, 15, 30, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    animation: fadeDown 0.6s ease both;
   }
 
-  .nav_content {
+  @keyframes fadeDown {
+    from {
+      opacity: 0;
+      transform: translateY(-12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .gm-header-inner {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .gm-logo {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .gm-logo-mark {
+    width: 36px;
+    height: 36px;
+    background: var(--gold);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--navy);
+    flex-shrink: 0;
+  }
+
+  .gm-logo-light {
+    font-weight: 300;
+    opacity: 0.6;
+  }
+
+  .gm-menu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    padding: 0;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--white);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .gm-menu-toggle:hover {
+    color: var(--gold2);
+  }
+
+  .gm-menu-toggle:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  .gm-menu-toggle-icon {
+    position: relative;
+    display: flex;
+    width: 22px;
+    height: 16px;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .gm-menu-toggle-bar {
+    display: block;
+    height: 2px;
+    width: 100%;
+    border-radius: 1px;
+    background: currentColor;
+    transition:
+      transform 0.25s ease,
+      opacity 0.2s ease;
+    transform-origin: center;
+  }
+
+  :global(body.gm-drawer-open) .gm-menu-toggle-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  :global(body.gm-drawer-open) .gm-menu-toggle-bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  :global(body.gm-drawer-open) .gm-menu-toggle-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gm-menu-toggle-bar {
+      transition: none;
+    }
+  }
+
+  .gm-nav-desktop {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .gm-nav-desktop a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray);
+    transition: color 0.2s;
+  }
+
+  .gm-nav-desktop a:hover {
+    color: var(--white);
+  }
+
+  .gm-header-cta {
+    display: flex;
+    align-items: center;
     gap: 1.5rem;
   }
+
+  .gm-phone-link {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--gold2);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.2s;
+  }
+
+  .gm-phone-link:hover {
+    color: var(--white);
+  }
+
+  .gm-phone-link svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    fill: currentColor;
+  }
+
+  .gm-drawer-backdrop {
+    display: none;
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    z-index: 98;
+    height: calc(100vh - 72px);
+    height: calc(100dvh - 72px);
+    background: rgba(5, 8, 18, 0.92);
+    opacity: 0;
+    transition: opacity 0.28s ease;
+    pointer-events: none;
+  }
+
+  .gm-drawer {
+    display: none;
+    position: fixed;
+    top: 72px;
+    right: 0;
+    z-index: 99;
+    height: calc(100vh - 72px);
+    height: calc(100dvh - 72px);
+    width: min(20rem, 88vw);
+    flex-direction: column;
+    padding: 1.25rem 1.25rem 1.75rem;
+    background: rgb(12, 18, 36);
+    border-left: 1px solid var(--border);
+    box-shadow: -12px 0 40px rgba(0, 0, 0, 0.35);
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .gm-drawer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .gm-drawer-nav a {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray);
+    padding: 0.85rem 0.5rem;
+    border-radius: 6px;
+    transition:
+      color 0.2s,
+      background 0.2s;
+  }
+
+  .gm-drawer-nav a:hover {
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .gm-drawer-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 1.25rem;
+  }
+
+  .gm-drawer-phone {
+    font-size: 1rem;
+    justify-content: flex-start;
+    padding: 0.5rem;
+    margin: 0 -0.5rem;
+    border-radius: 6px;
+  }
+
+  .gm-drawer-phone svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .gm-drawer-cta {
+    text-align: center;
+    justify-content: center;
+  }
+
+  :global(body.gm-drawer-open) {
+    overflow: hidden;
+  }
+
+  @media (max-width: 900px) {
+    .gm-menu-toggle {
+      display: flex;
+    }
+
+    .gm-nav-desktop {
+      display: none;
+    }
+
+    .gm-header-cta {
+      display: none;
+    }
+
+    .gm-drawer-backdrop,
+    .gm-drawer {
+      display: block;
+    }
+
+    .gm-drawer {
+      display: flex;
+    }
+
+    :global(body.gm-drawer-open) .gm-drawer-backdrop {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    :global(body.gm-drawer-open) .gm-drawer {
+      transform: translateX(0);
+    }
+  }
+
+  @media (max-width: 900px) and (prefers-reduced-motion: reduce) {
+    .gm-drawer-backdrop,
+    .gm-drawer {
+      transition: none;
+    }
+
+    :global(body.gm-drawer-open) .gm-drawer {
+      transform: translateX(0);
+    }
+  }
 </style>
+
+<script is:inline>
+  (function () {
+    var toggle = document.querySelector(".gm-menu-toggle");
+    var drawer = document.getElementById("gm-drawer");
+    var backdrop = document.querySelector(".gm-drawer-backdrop");
+    if (!toggle || !drawer || !backdrop) return;
+
+    var mq = window.matchMedia("(max-width: 900px)");
+
+    function isMobile() {
+      return mq.matches;
+    }
+
+    function openDrawer() {
+      document.body.classList.add("gm-drawer-open");
+      toggle.setAttribute("aria-expanded", "true");
+      toggle.setAttribute("aria-label", "Cerrar menú");
+      drawer.removeAttribute("inert");
+      drawer.setAttribute("aria-hidden", "false");
+      backdrop.setAttribute("aria-hidden", "false");
+      var first = drawer.querySelector("a[href]");
+      if (first) first.focus();
+    }
+
+    function closeDrawer() {
+      document.body.classList.remove("gm-drawer-open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Abrir menú");
+      drawer.setAttribute("inert", "");
+      drawer.setAttribute("aria-hidden", "true");
+      backdrop.setAttribute("aria-hidden", "true");
+      toggle.focus();
+    }
+
+    function onToggleClick() {
+      if (!isMobile()) return;
+      if (document.body.classList.contains("gm-drawer-open")) closeDrawer();
+      else openDrawer();
+    }
+
+    toggle.addEventListener("click", onToggleClick);
+
+    backdrop.addEventListener("click", function () {
+      if (document.body.classList.contains("gm-drawer-open")) closeDrawer();
+    });
+
+    drawer.querySelectorAll("a[href]").forEach(function (a) {
+      a.addEventListener("click", function () {
+        if (document.body.classList.contains("gm-drawer-open")) closeDrawer();
+      });
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (
+        e.key === "Escape" &&
+        document.body.classList.contains("gm-drawer-open")
+      ) {
+        e.preventDefault();
+        closeDrawer();
+      }
+    });
+
+    mq.addEventListener("change", function () {
+      if (!isMobile() && document.body.classList.contains("gm-drawer-open")) {
+        document.body.classList.remove("gm-drawer-open");
+        drawer.setAttribute("inert", "");
+        drawer.setAttribute("aria-hidden", "true");
+        backdrop.setAttribute("aria-hidden", "true");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Abrir menú");
+      }
+    });
+  })();
+</script>

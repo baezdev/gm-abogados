@@ -1,0 +1,103 @@
+---
+import { gmLinks } from "@/utils/index";
+import type { Service } from "./types";
+
+interface Props {
+  data: Service;
+}
+
+const { data } = Astro.props;
+---
+
+<section class="sv-hero reveal">
+  <div class="sv-hero-inner">
+    <span class="sv-label">{data.heroLabel}</span>
+    <h1>{data.heroHeading}</h1>
+    <p class="sv-hero-desc">{data.description}</p>
+    <div class="sv-hero-actions">
+      <a href="#contacto" class="btn-hero">Consulta Gratis — Sin Costo</a>
+      <a href={`tel:${gmLinks.phone}`} class="btn-outline">Llamar Ahora</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sv-hero {
+    min-height: 70vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
+    gap: 3rem;
+    padding: 10rem clamp(1.5rem, 5vw, 4rem) 6rem;
+    position: relative;
+    overflow: hidden;
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .sv-hero::before {
+    content: "";
+    position: absolute;
+    top: -20%;
+    right: -5%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(
+      circle,
+      rgba(201, 168, 76, 0.06) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  .sv-hero-inner {
+    max-width: 640px;
+  }
+
+  .sv-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+  }
+
+  .sv-label::before {
+    content: "";
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .sv-hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 1.25rem;
+  }
+
+  .sv-hero-desc {
+    font-size: 1rem;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .sv-hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+</style>

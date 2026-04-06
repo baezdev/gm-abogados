@@ -1,0 +1,164 @@
+---
+import type { Service } from "./types";
+
+interface Props {
+  data: Pick<Service, "intro" | "urgencia" | "derechos">;
+}
+
+const { data } = Astro.props;
+---
+
+<section class="sv-section sv-derechos">
+  <div class="sv-container sv-derechos-grid">
+    <div class="sv-intro reveal">
+      <span class="sv-section-label">Tu situación</span>
+      <h2>¿Qué dice la ley sobre tu caso?</h2>
+      <p>{data.intro}</p>
+      <div class="sv-urgencia">
+        <span class="sv-urgencia-icon">⚠</span>
+        <p>{data.urgencia}</p>
+      </div>
+    </div>
+    <div class="sv-derechos-list reveal">
+      <span class="sv-section-label">Tus derechos</span>
+      <h2>Lo que puedes reclamar</h2>
+      <ul>
+        {
+          data.derechos.map((d) => (
+            <li class="sv-derecho-item">
+              <div class="sv-derecho-art">{d.art}</div>
+              <div>
+                <div class="sv-derecho-concepto">{d.concepto}</div>
+                <div class="sv-derecho-desc">{d.desc}</div>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sv-section {
+    padding: 6rem clamp(1.5rem, 5vw, 4rem);
+    border-top: 1px solid var(--border, rgba(201, 168, 76, 0.18));
+  }
+
+  .sv-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .sv-section-label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold, #c9a84c);
+    margin-bottom: 0.75rem;
+  }
+
+  .sv-section h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .sv-derechos {
+    background: var(--navy2, #111827);
+  }
+
+  .sv-derechos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .sv-intro p {
+    font-size: 0.95rem;
+    color: var(--gray, #8a9ab5);
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+  }
+
+  .sv-urgencia {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    background: rgba(192, 57, 43, 0.08);
+    border: 1px solid rgba(192, 57, 43, 0.25);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+  }
+
+  .sv-urgencia-icon {
+    color: #e74c3c;
+    flex-shrink: 0;
+    font-style: normal;
+  }
+
+  .sv-urgencia p {
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .sv-derechos-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sv-derecho-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border, rgba(201, 168, 76, 0.18));
+  }
+
+  .sv-derecho-item:first-child {
+    border-top: 1px solid var(--border, rgba(201, 168, 76, 0.18));
+  }
+
+  .sv-derecho-art {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--gold, #c9a84c);
+    background: rgba(201, 168, 76, 0.1);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+
+  .sv-derecho-concepto {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 0.2rem;
+  }
+
+  .sv-derecho-desc {
+    font-size: 0.82rem;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .sv-derechos-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+</style>

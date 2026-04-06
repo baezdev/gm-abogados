@@ -1,0 +1,89 @@
+---
+import ArrowR from "../icons/ArrowR.astro";
+import ArtPill from "./ArtPill.astro";
+
+interface Props {
+  num: string;
+  title: string;
+  description: string;
+  arts: string[];
+  url: string;
+}
+
+const { num, title, description, arts, url } = Astro.props;
+---
+
+<a href={url} class="gm-situacion-card">
+  <div class="gm-situacion-arrow">
+    <ArrowR />
+  </div>
+  <div class="gm-situacion-num">{num}</div>
+  <div class="gm-situacion-title">{title}</div>
+  <div class="gm-situacion-desc">{description}</div>
+  <div class="gm-situacion-arts">
+    {arts.map((art) => <ArtPill art={art} />)}
+  </div>
+</a>
+
+<style>
+  .gm-situacion-card {
+    background: var(--navy2);
+    padding: 2rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+    display: block;
+  }
+
+  .gm-situacion-card:hover {
+    background: var(--navy3);
+  }
+
+  .gm-situacion-card:hover .gm-situacion-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .gm-situacion-arrow {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: all 0.2s;
+    color: var(--gold);
+    font-size: 1.2rem;
+  }
+
+  .gm-situacion-num {
+    font-family: var(--serif);
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(201, 168, 76, 0.1);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    user-select: none;
+  }
+
+  .gm-situacion-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .gm-situacion-desc {
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.65;
+    margin-bottom: 1rem;
+  }
+
+  .gm-situacion-arts {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+</style>

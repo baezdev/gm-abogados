@@ -1,0 +1,64 @@
+---
+interface Props {
+  path: string;
+  title: string;
+  description: string;
+}
+
+const { path, title, description } = Astro.props;
+---
+
+<li class="gm-porque-item">
+  <div class="gm-porque-icon">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d={path} />
+    </svg>
+  </div>
+  <div>
+    <div class="gm-porque-item-title">{title}</div>
+    <div class="gm-porque-item-desc">{description}</div>
+  </div>
+</li>
+
+<style>
+  .gm-porque-item {
+    display: flex;
+    gap: 1.25rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .gm-porque-item:first-child {
+    border-top: 1px solid var(--border);
+  }
+
+  .gm-porque-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(201, 168, 76, 0.1);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .gm-porque-icon svg {
+    stroke: var(--gold);
+  }
+
+  .gm-porque-item-title {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.35rem;
+  }
+
+  .gm-porque-item-desc {
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+</style>

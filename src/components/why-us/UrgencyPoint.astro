@@ -1,0 +1,29 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<li class="gm-urgency-point" set:html={text} />
+
+<style>
+  .gm-urgency-point {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.88rem;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+
+  .gm-urgency-point::before {
+    content: "→";
+    color: var(--red2);
+    flex-shrink: 0;
+  }
+
+  .gm-urgency-point :global(strong) {
+    color: var(--white);
+  }
+</style>
