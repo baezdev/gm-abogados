@@ -118,6 +118,8 @@ export async function sendContactEmail(
       html: generateEmailHtml(data),
     });
 
+    console.log(error);
+
     if (error) {
       console.error("Resend error:", error);
       return { success: false, error: "Error al enviar el correo" };
