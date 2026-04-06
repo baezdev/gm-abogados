@@ -12,16 +12,17 @@
 El rediseño tiene una base técnica sólida con configuración correcta de sitemap, robots.txt, meta tags básicos y schema markup. Sin embargo, existen **problemas críticos** que requieren atención inmediata, especialmente links a páginas inexistentes y estructura de contenido limitada.
 
 **Salud general:** 🟡 Media-Alta  
-**Prioridad de acciones:** Alta  
+**Prioridad de acciones:** Alta
 
 ---
 
 ## 1. CRÍTICO - Problemas que Bloquean SEO
 
 ### 1.1 Links a Páginas Inexistentes
-| Ubicación | Link | Problema |
-|------------|------|----------|
-| `SituationCard.astro:16` | `/despido-injustificado` | Page no existe |
+
+| Ubicación                | Link                     | Problema            |
+| ------------------------ | ------------------------ | ------------------- |
+| `SituationCard.astro:16` | `/despido-injustificado` | Page no existe      |
 | `SituationCard.astro:16` | `/despido-injustificado` | Page no existe (x5) |
 
 **Impacto:** Alto  
@@ -32,9 +33,11 @@ El rediseño tiene una base técnica sólida con configuración correcta de site
 ---
 
 ### 1.2 Estructura Single-Page Limitada
+
 El sitio es 100% single-page (todo en index.astro), lo cual limita severamente las oportunidades SEO.
 
 **Problemas:**
+
 - No hay páginas individuales para servicios (despido injustificado, acoso laboral, horas extras, etc.)
 - Cada servicio debería tener su propia página con contenido específico
 - Imposible rankear para keywords de servicios específicos
@@ -48,6 +51,7 @@ El sitio es 100% single-page (todo en index.astro), lo cual limita severamente l
 ## 2. ALTO - Problemas Técnicos SEO
 
 ### 2.1 Favicon PNG Faltantes
+
 ```html
 <!-- En Layout.astro:74-76 -->
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -56,8 +60,9 @@ El sitio es 100% single-page (todo en index.astro), lo cual limita severamente l
 ```
 
 **Archivos faltantes:**
+
 - `/favicon-32x32.png` ❌ No existe
-- `/favicon-16x16.png` ❌ No existe  
+- `/favicon-16x16.png` ❌ No existe
 - `/apple-touch-icon.png` ❌ No existe
 
 **Impacto:** Medio  
@@ -68,6 +73,7 @@ El sitio es 100% single-page (todo en index.astro), lo cual limita severamente l
 ---
 
 ### 2.2 Schema AggregateRating Sin Respaldo
+
 ```json
 // En Layout.astro:168-174
 "aggregateRating": {
@@ -80,7 +86,8 @@ El sitio es 100% single-page (todo en index.astro), lo cual limita severamente l
 **Problema:** Google puede penalizar si el aggregateRating no está respaldado por reviews reales en Google Business Profile o fuente verificable.
 
 **Impacto:** Alto  
-**Solución:** 
+**Solución:**
+
 1. Vincular con Google Business Profile real
 2. O agregar `reviewCount` en schema de Reviews reales
 3. O agregar `star-rating` schema para las reseñas del sitio
@@ -88,24 +95,30 @@ El sitio es 100% single-page (todo en index.astro), lo cual limita severamente l
 ---
 
 ### 2.3 Falta Schema de Reviews (Reviews sobre Testimonios)
+
 Los testimonios reales en `Testimonials.astro` no tienen schema markup.
 
 **Impacto:** Alto  
 **Solución:** Agregar `Review` schema para cada testimonio:
+
 ```json
 {
   "@context": "https://schema.org",
   "@type": "Review",
-  "reviewRating": {"@type": "Rating", "ratingValue": "5"},
-  "author": {"@type": "Person", "name": "Raúl P. Ramírez"},
+  "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+  "author": { "@type": "Person", "name": "Raúl P. Ramírez" },
   "reviewBody": "...",
-  "itemReviewed": {"@type": "LegalService", "name": "GM Abogados Laboralistas"}
+  "itemReviewed": {
+    "@type": "LegalService",
+    "name": "GM Abogados Laboralistas"
+  }
 }
 ```
 
 ---
 
 ### 2.4 Schema LegalService - Dirección Incompleta
+
 ```json
 // Layout.astro:113-118
 "address": {
@@ -117,6 +130,7 @@ Los testimonios reales en `Testimonials.astro` no tienen schema markup.
 ```
 
 **Falta:**
+
 - `streetAddress` (calle y número)
 - `postalCode`
 - `Cédula profesional` del abogado en schema
@@ -127,6 +141,7 @@ Los testimonios reales en `Testimonials.astro` no tienen schema markup.
 ---
 
 ### 2.5 Canonical en home page
+
 ```html
 <link rel="canonical" href="https://gm-abogados.com.mx/" />
 ```
@@ -141,6 +156,7 @@ Los testimonios reales en `Testimonials.astro` no tienen schema markup.
 ## 3. MEDIO - On-Page SEO
 
 ### 3.1 H1 Muy Largo
+
 ```html
 <!-- Hero.astro:9 -->
 <h1>Recupera tu <em>liquidación</em> sin arriesgar un peso</h1>
@@ -156,6 +172,7 @@ Los testimonios reales en `Testimonials.astro` no tienen schema markup.
 ---
 
 ### 3.2 H2 en Testimonios Sin Contenido Alternativo
+
 ```html
 <!-- Testimonials.astro:33 -->
 <h2>Trabajadores que ya recuperaron su liquidación</h2>
@@ -169,10 +186,11 @@ Los testimonios reales en `Testimonials.astro` no tienen schema markup.
 ---
 
 ### 3.3 Título Duplicado en OG y Meta
-| Meta Tag | Contenido |
-|----------|-----------|
-| `<title>` | "GM Abogados Laboralistas CDMX \| Despido Injustificado y Más" |
-| `og:title` | "GM Abogados Laboralistas CDMX \| +150 Casos Ganados" |
+
+| Meta Tag   | Contenido                                                      |
+| ---------- | -------------------------------------------------------------- |
+| `<title>`  | "GM Abogados Laboralistas CDMX \| Despido Injustificado y Más" |
+| `og:title` | "GM Abogados Laboralistas CDMX \| +150 Casos Ganados"          |
 
 **Problema:** Diferentes mensajes pueden causar confusión en compartidos sociales.
 
@@ -182,7 +200,9 @@ Los testimonios reales en `Testimonials.astro` no tienen schema markup.
 ---
 
 ### 3.4 Falta Privacy Policy y Términos
+
 No hay páginas de:
+
 - `/privacidad` o `/privacy-policy`
 - `/terminos` o `/terms-of-service`
 
@@ -194,16 +214,15 @@ No hay páginas de:
 ---
 
 ### 3.5 Footer Muy Minimalista
+
 ```html
 <!-- Footer.astro:12-16 -->
-const footerLinks = [
-  { label: "Servicios", href: "#situaciones" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contacto", href: "#contacto" },
-];
+const footerLinks = [ { label: "Servicios", href: "#situaciones" }, { label:
+"FAQ", href: "#faq" }, { label: "Contacto", href: "#contacto" }, ];
 ```
 
 **Problema:** No incluye links esenciales:
+
 - Política de privacidad
 - Términos y condiciones
 - Aviso legal
@@ -216,6 +235,7 @@ const footerLinks = [
 ## 4. BAJO - Optimizaciones Adicionales
 
 ### 4.1 Preconnect Duplicado
+
 ```html
 <!-- Layout.astro:86-88 -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -231,6 +251,7 @@ const footerLinks = [
 ---
 
 ### 4.2 OG Image Tamaño Grande
+
 - Archivo: `og.webp` = 939KB
 - Recomendado: < 200KB
 
@@ -240,6 +261,7 @@ const footerLinks = [
 ---
 
 ### 4.3 Falta hreflang x-default
+
 ```html
 <link rel="alternate" hreflang="es-mx" href="https://gm-abogados.com.mx/" />
 <link rel="alternate" hreflang="es" href="https://gm-abogados.com.mx/" />
@@ -250,6 +272,7 @@ const footerLinks = [
 ---
 
 ### 4.4 Meta Keywords Obsoleto
+
 No hay meta keywords tag. Para sitios modernos ya no es necesario, pero podría agregarse para categorización interna.
 
 **Impacto:** Muy bajo  
@@ -260,9 +283,11 @@ No hay meta keywords tag. Para sitios modernos ya no es necesario, pero podría 
 ## 5. FALTANTE - Contenido y Estructura
 
 ### 5.1 No Hay Blog/Recursos
+
 **Impacto:** Alto - Oportunidad perdida de contenido
 
 **Recomendación:** Agregar sección de blog con artículos como:
+
 - "¿Cuánto me corresponde por despido?"
 - "Diferencia entre despido y renuncia"
 - "Cómo demandar sin abogado"
@@ -270,6 +295,7 @@ No hay meta keywords tag. Para sitios modernos ya no es necesario, pero podría 
 ---
 
 ### 5.2 No Hay Breadcrumbs
+
 El sitio single-page no tiene breadcrumb navigation.
 
 **Impacto:** Medio  
@@ -278,7 +304,9 @@ El sitio single-page no tiene breadcrumb navigation.
 ---
 
 ### 5.3 Falta About Page
+
 No hay página "Sobre Nosotros" con:
+
 - Historia del despacho
 - Credenciales del abogado
 - Fotos reales del equipo
@@ -292,25 +320,29 @@ No hay página "Sobre Nosotros" con:
 ## 6. Checklist de Implementación
 
 ### Prioridad 1 - CRÍTICO
+
 - [x] **Crear páginas de servicios** ✅ (`/servicios/despido-injustificado`, `/servicios/acoso-laboral`, `/servicios/horas-extras`, `/servicios/falta-contrato`, `/servicios/accidente-laboral`)
 - [x] **Fix links rotos** en SituationCard ✅ (ahora apuntan a las nuevas páginas de servicios)
 
 ### Prioridad 2 - ALTO
+
 - [ ] **Generar favicon PNGs faltantes** o remover referencias
 - [x] **Agregar pages de Privacy Policy y Terms** ✅ (`/legal/privacy-policy`, `/legal/terms`)
 - [ ] **Agregar Schema de Reviews** para testimonios
 - [ ] **Verificar AggregateRating** con fuente real o remover
 
 ### Prioridad 3 - MEDIO
+
 - [x] **Meta tags armonizados** ✅ (title, og:title, twitter:title y descriptions ahora son consistentes)
 - [ ] **Completar address en LegalService schema**
 - [ ] **Crear About page** con credenciales
-- [ ] **Agregar blog/sección de recursos**
+- [x] **Agregar blog/sección de recursos**
 - [x] **Comprimir OG image** ✅ (939KB → 49KB)
 - [ ] **Acortar H1** a 50-60 caracteres
 
 ### Prioridad 4 - BAJO
-- [ ] **Remover preconnect duplicado** de Google Fonts
+
+- [x] **Remover preconnect duplicado** de Google Fonts
 - [ ] **Agregar hreflang x-default**
 - [ ] **Consolidar meta titles** (OG y regular)
 
@@ -365,4 +397,4 @@ No hay página "Sobre Nosotros" con:
 
 ---
 
-*Reporte generado: 2026-03-30*
+_Reporte generado: 2026-03-30_

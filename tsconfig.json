@@ -36,6 +36,9 @@
       ],
       "@lib/*": [
         "./src/lib/*"
+      ],
+      "@config/*": [
+        "./src/config/*"
       ]
     },
     "jsx": "react-jsx",

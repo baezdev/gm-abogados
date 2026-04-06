@@ -17,7 +17,7 @@
 
 ---
 
-## 2. Duplicación de Estilos
+## 2. Duplicación de Estilos [x]
 
 Los componentes `.gm-field-group` con label/input/select se repiten en:
 
@@ -29,37 +29,25 @@ Los componentes `.gm-field-group` con label/input/select se repiten en:
 
 ---
 
-## 3. Schema.org Hardcodeado en Layout
+## 3. Schema.org Hardcodeado en Layout [x]
 
-- El JSON-LD de FAQ está hardcodeado en `src/layouts/Layout.astro:184-231`
-- El Schema LegalService también está hardcodeado.
-
-**Refactor sugerido**: Extraer a archivos de datos en `src/content/` o `src/data/`.
+- **Hecho**: `src/data/schema/legalService.ts` (LegalService), `src/data/schema/faqPage.ts` (FAQPage + datos `homeFaqForSchema`), barrel `src/data/schema/index.ts`. `Layout.astro` solo serializa con `JSON.stringify`.
 
 ---
 
-## 4. Valores Hardcodeados
+## 4. Valores Hardcodeados [x]
 
-Teléfono, URL, email, redes sociales dispersos en:
-
-- `src/utils/index.ts`
-- `src/layouts/Layout.astro` (meta tags)
-- `src/components/contact/Contact.astro`
-
-**Refactor sugerido**: Centralizar en `src/config/site.ts`
+- **Hecho**: `src/config/site.ts` con origen, contacto, SEO por defecto, geo y textos compartidos con schema; `absoluteUrl()` y `whatsappUrl()`. JSON-LD en `src/data/schema/` (punto 3). Consumen `Layout.astro`, `utils/index.ts` (`gmBrand` / `gmLinks`, plantilla de email), `Contact.astro`, `Nav.astro` y canonical en `servicios/[servicio].astro`.
 
 ---
 
-## 5. Falta Mobile Menu
+## 5. Falta Mobile Menu [x]
 
-- `src/components/nav/Nav.astro` oculta el nav en mobile (línea 147: `display: none`) pero no hay menú hamburguesa.
-- El teléfono y CTA se ocultan en mobile pequeño.
-
-**Acción sugerida**: Implementar mobile menu.
+- **Hecho**: Drawer desde la derecha (≤900px) con enlaces, teléfono y CTA; backdrop, Escape, bloqueo de scroll y estado `aria` / `inert`.
 
 ---
 
-## 6. SEO: Meta Tags Duplicados/Obsoletos
+## 6. SEO: Meta Tags Duplicados/Obsoletos [x]
 
 En `src/layouts/Layout.astro`:
 
@@ -76,11 +64,11 @@ En `src/layouts/Layout.astro`:
 - `src/content/services.ts` y FAQ están definidos como arrays en archivos `.astro`
 - Astro tiene **Content Collections** para mejor tipado y validación.
 
-**Refactor sugerido**: Migrar a Content Collections si se expande el contenido.
+**Refactor sugerido**: Migrar a Content Collections
 
 ---
 
-## 8. Fonts: Mezcla de Fuentes
+## 8. Fonts: Mezcla de Fuentes [x]
 
 - `Layout.astro:96` carga DM Sans y Playfair Display desde Google Fonts
 - `package.json` instala `@fontsource-variable/inter` y `merriweather` (nunca usados)
@@ -100,15 +88,15 @@ En `src/layouts/Layout.astro`:
 
 ## Priorización Sugerida
 
-| Prioridad | Tarea                                                                                        |
-| --------- | -------------------------------------------------------------------------------------------- |
-| 🔴 Alta   | Eliminar código muerto (useContactForm.ts, email.ts, emailService.ts, componentes no usados) |
-| 🔴 Alta   | Implementar mobile menu en Nav                                                               |
-| 🟡 Media  | Extraer JSON-LD a archivos de datos                                                          |
-| 🟡 Media  | Centralizar constantes en config                                                             |
-| 🟡 Media  | Consolidar estilos de campos                                                                 |
-| 🟢 Baja   | Limpiar meta tags obsoletos                                                                  |
-| 🟢 Baja   | Eliminar fonts no usadas                                                                     |
+| Prioridad    | Tarea                                                                                        |
+| ------------ | -------------------------------------------------------------------------------------------- |
+| 🔴 Alta      | Eliminar código muerto (useContactForm.ts, email.ts, emailService.ts, componentes no usados) |
+| ~~🔴 Alta~~  | ~~Implementar mobile menu en Nav~~ (hecho)                                                   |
+| ~~🟡 Media~~ | ~~Extraer JSON-LD a archivos de datos~~ (hecho → `src/data/schema/`)                         |
+| ~~🟡 Media~~ | ~~Centralizar constantes en config~~ (hecho → `src/config/site.ts`)                          |
+| 🟡 Media     | Consolidar estilos de campos                                                                 |
+| 🟢 Baja      | Limpiar meta tags obsoletos                                                                  |
+| 🟢 Baja      | Eliminar fonts no usadas                                                                     |
 
 ---
 

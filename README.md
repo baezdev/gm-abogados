@@ -1,46 +1,60 @@
-# Astro Starter Kit: Basics
+# GM Abogados
 
-```sh
-pnpm create astro@latest -- --template basics
+Sitio web corporativo para firma de abogados laborales en CDMX, México. Especializados en derecho laboral mexicano.
+
+## Stack
+
+- **Framework**: Astro 5.x (SSR + Netlify adapter)
+- **UI Components**: Svelte 5 para componentes interactivos
+- **Styling**: CSS custom properties
+- **Email**: Resend API
+- **Deploy**: Netlify
+
+## Secciones
+
+- Hero con CTA urgency
+- Trust bar (estadísticas)
+- Situaciones que cubren
+- Por qué elegirnos
+- Calculadora de indemnización (Svelte)
+- Testimonios
+- FAQ dinámico
+- Formulario de contacto
+- WhatsApp flotante
+
+## Servicios Legales
+
+1. Despido Injustificado (Art. 48 LFT)
+2. Acoso Laboral (Art. 3° Bis LFT)
+3. Horas Extras (Art. 67-68 LFT)
+4. Falta de Contrato (Art. 25 LFT)
+5. Accidente Laboral (Art. 473 LFT)
+
+## Development
+
+```bash
+pnpm install
+pnpm dev      # localhost:4321
+pnpm build    # producción
+pnpm preview  # preview build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Estructura
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```
+src/
+├── pages/           # Rutas: index, legal/*, servicios/[servicio]
+├── components/      # 13 secciones modulares
+├── layouts/         # Layout principal
+├── content/         # Datos de servicios
+├── lib/             # emailService.ts
+├── styles/          # global.css
+└── utils/           # Observer utilities
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## SEO
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Sitemap dinámico
+- Meta tags por página
+- Schema markup
+- Open Graph images
